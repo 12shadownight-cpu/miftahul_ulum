@@ -1,0 +1,98 @@
+/project-root
+│
+├── /assets
+│   ├── /css
+│   ├── /js
+│   ├── /images
+│   └── /uploads
+│
+├── /config
+|   ├── Autoload.php
+│   └── Database.php
+│
+├── /models
+│   ├── User.php
+│   ├── Pengurus.php
+│   ├── BiodataMurid.php
+│   ├── BiodataOrangtua.php
+│   ├── ValidasiData.php
+│   └── Pengumuman.php
+│
+├── /controllers
+│   ├── /user
+|   |     ├── user_login_handler.php
+|   |     ├── user_logout_handler.php
+|   |     ├── user_register_handler.php
+|   |     └── UserController.php
+|   |
+│   ├── /pengurus
+|   |     ├── add_pengurus_handler.php
+|   |     ├── delete_pengurus_handler.php
+|   |     ├── edit_pengurus_handler.php
+|   |     ├── pengurus_login_handler.php
+|   |     ├── pengurus_logout_handler.php
+|   |     └── PengurusController.php
+|   |
+│   ├── /murid
+|   |     ├── add_murid_handler.php
+|   |     ├── delete_murid_handler.php
+|   |     ├── edit_murid_handler.php
+|   |     └── MuridController.php
+|   |
+│   ├── /orangtua
+|   |     ├── add_orangtua_handler.php
+|   |     ├── delete_orangtua_handler.php
+|   |     ├── edit_orangtua_handler.php
+|   |     └── OrangtuaController.php
+|   |
+|   ├── /validasi
+|   |     ├── add_validasi_handler.php
+|   |     ├── delete_validasi_handler.php
+|   |     ├── edit_validasi_handler.php
+|   |     └── ValidasiController.php
+|   |
+│   └── /pengumuman
+|        ├── add_pengumuman_handler.php
+|        ├── delete_pengumuman_handler.php
+|        ├── edit_pengumuman_handler.php
+|        └── PengumumanController.php
+│
+├── /views
+│   ├── /partials                         ← Shared UI elements (no logic)
+│   │   ├── pengurus_header.php           ← Top layout pengurus (nav, head)
+│   │   ├── pengurus_footer.php           ← Bottom layout pengurus (scripts, footer)
+│   │   ├── user_header.php               ← Top layout user (nav, head) 
+│   │   └── user_footer.php               ← Bottom layout user (scripts, footer)
+│   │
+│   ├── /user
+│   │   ├── login.php
+│   │   ├── register.php
+│   │   ├── notice.php                    ← Views for student users
+│   │   ├── biodata_murid.php             ← Form for student data
+│   │   ├── biodata_orangtua.php          ← Form for parent data
+|   |   ├── hasil_validasi.php            ← Final validation result
+│   │   └── print_validasi.php            ← Print validation result
+│   │
+│   ├── /pengurus
+│   │   ├── login.php                     ← Views for all pengurus (admin + sekretaris)
+│   │   │
+│   │   ├── /admin                        ← Admin-only views
+│   │   │   ├── dashboard.php
+│   │   │   ├── data-pengurus.php
+│   │   │   ├── data-pengumuman.php
+│   │   │   ├── input-pengurus.php
+│   │   │   └── input-pengumuman.php
+│   │   │
+│   │   └── /sekretaris                   ← Sekretaris-only views
+│   │       ├── dashboard.php
+│   │       ├── data-murid.php
+│   │       ├── data-orangtua.php
+│   │       ├── tabel-validasi.php        ← Table of result validations
+│   │       └── validasi.php              ← Form to validate entries
+│   │
+│   └── /public                           ← Public views (if any)
+│       └── index.php                     ← Public landing page
+│
+├── index.php         
+├── .htaccess
+└── README.md

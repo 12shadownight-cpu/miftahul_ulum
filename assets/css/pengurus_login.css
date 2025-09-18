@@ -1,0 +1,51 @@
+/* === Pengurus Login Page Styles === */
+
+/* Wrapper for background and layout */
+.pengurus-login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../images/bg_pengurus.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+/* Blurred overlay behind form */
+.pengurus-login-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    backdrop-filter: blur(6px);
+    background-color: rgba(255, 255, 255, 0.1); /* optional soft white layer */
+    z-index: 0;
+}
+
+/* Form container */
+.pengurus-login-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Form title */
+.pengurus-login-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Password toggle icon */
+.password-toggle {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: #666;
+}

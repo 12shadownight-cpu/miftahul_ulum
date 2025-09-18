@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Full Layout with Sticky Footer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        display: flex;
+        font-family: 'Segoe UI', sans-serif;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(to bottom right, #9c27b0, #8e24aa);
+        color: white;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+      }
+
+      .sidebar .brand {
+        padding: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-link {
+        color: white;
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        color: white;
+      }
+
+      .nav-link i {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .collapse .nav-link {
+        padding-left: 3.5rem;
+        font-size: 0.95rem;
+      }
+
+      /* Wrapper for navbar + main content + footer */
+      .main-wrapper {
+        margin-left: 250px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 1rem;
+      }
+
+      .no-border {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+      }
+
+      /* Shrink all form controls inside biodata form */
+      .card form .form-control {
+        height: 32px;
+        padding: 4px 8px;
+        font-size: 0.9rem;
+        max-width: 400px; /* shorten the input width */
+      }
+
+      /* Shrink file input to match */
+      .card form input[type='file'].form-control {
+        padding: 3px;
+        height: 32px;
+        max-width: 400px; /* shorten the input width */
+      }
+
+      /* Shrink date input group (calendar) */
+      .card form .input-group {
+        max-width: 400px;
+      }
+
+      /* Shrink input-group add-ons (like calendar icon) */
+      .card form .input-group-text {
+        height: 32px;
+        padding: 4px 8px;
+        font-size: 0.9rem;
+        max-width: 400px; /* shorten the input width */
+      }
+
+      /* Shrink radio buttons and labels */
+      .card form .form-check-input {
+        width: 14px;
+        height: 14px;
+        margin-top: 0.2rem; /* align vertically with label */
+      }
+
+      .card form .form-check-label {
+        font-size: 0.9rem;
+        margin-left: 2px;
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        border-top: 1px solid #dee2e6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="brand">CREATIVE TIM</div>
+      <nav class="nav flex-column mt-3">
+        <a href="#" class="nav-link"><i class="bi bi-speedometer2"></i>Dashboard</a>
+        <a href="#" class="nav-link active"><i class="bi bi-person"></i>User Profile</a>
+        <a href="#" class="nav-link"><i class="bi bi-clipboard-data"></i>Table List</a>
+        <!-- Expandable Dropdown -->
+        <a class="nav-link" data-bs-toggle="collapse" href="#collapseLayouts" role="button">
+          <i class="bi bi-layout-text-sidebar-reverse"></i>Layouts
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <div class="collapse" id="collapseLayouts">
+          <a href="#" class="nav-link">Sub Layout 1</a>
+          <a href="#" class="nav-link">Sub Layout 2</a>
+        </div>
+
+        <a href="#" class="nav-link"><i class="bi bi-stars"></i>Icons</a>
+        <a href="#" class="nav-link"><i class="bi bi-geo-alt"></i>Maps</a>
+        <a href="#" class="nav-link"><i class="bi bi-bell"></i>Notifications</a>
+      </nav>
+    </div>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg bg-light shadow-sm mb-3">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+          <!-- Left: Navbar Brand -->
+          <span class="navbar-brand mb-0 h1">
+            Welcome to Dashboard User !
+          </span>
+
+          <!-- Right: User & Logout -->
+          <div class="d-flex align-items-center">
+            <span class="me-3 fw-semibold"> John Doe </span>
+            <a href="logout.php" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-box-arrow-right me-1"></i> Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="main-content container-fluid">
+        <div class="px-3 py-2">
+          <h2 class="fw-bold mb-1">Form Biodata Siswa</h2>
+          <p class="text-muted">Silakan lengkapi data siswa di bawah ini.</p>
+        </div>
+        <div class="card mx-auto" style="max-width: 900px">
+          <div class="card">
+            <div class="card-body">
+              <form>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nama Siswa</label>
+                    <input type="text" class="form-control" name="nama_murid" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Umur Siswa</label>
+                    <input type="number" class="form-control" name="umur_murid" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="jenis_kelamin"/>
+                        <label class="form-check-label">Laki-Laki</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="jenis_kelamin"/>
+                        <label class="form-check-label">Perempuan</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Tempat Lahir</label>
+                    <input type="text" class="form-control" name="tempat_lahir"readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Tanggal Lahir</label>
+                    <div class="input-group">
+                      <input type="date" class="form-control" name="tanggal_lahir" readonly/>
+                      <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Asal TK</label>
+                    <input type="text" class="form-control" name="asal_tk" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Alamat</label>
+                    <input type="text" class="form-control" name="alamat" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">NIK</label>
+                    <input type="text" class="form-control" name="nik" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">No. KK</label>
+                    <input type="text" class="form-control" name="no_kk" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Akta Kelahiran</label>
+                    <input type="file" class="form-control" name="file_akta" accept=".png,.jpeg,.jpg" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Kartu Keluarga</label>
+                    <input type="file" class="form-control" name="file_kk" accept=".png,.jpeg,.jpg" readonly/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Ijazah TK</label>
+                    <input type="file" class="form-control" name="file_ijazah" accept=".png,.jpeg,.jpg" readonly/>
+                  </div>
+                </div>
+              </form>
+              <div class="text-center mt-4">
+                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                  Tambah Data
+                </button>
+                <button type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#modalUbah">
+                  Ubah Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Modal -->
+      <div class="modal fade" id="modalTambah" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <form action="handler/insert.php" method="POST" enctype="multipart/form-data">
+              <div class="modal-header">
+                <h5 class="modal-title">Tambah Data Siswa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nama Siswa</label>
+                    <input type="text" name="nama_murid" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Umur Siswa</label>
+                    <input type="number" name="umur_murid" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" required>
+                        <label class="form-check-label">Laki-Laki</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" required>
+                        <label class="form-check-label">Perempuan</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Tanggal Lahir</label>
+                    <div class="input-group">
+                      <input type="text" id="dateAdd" name="tanggal_lahir" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Asal TK</label>
+                    <input type="text" name="asal_tk" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Alamat</label>
+                    <input type="text" name="alamat" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">NIK</label>
+                    <input type="text" name="nik" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">No. KK</label>
+                    <input type="text" name="no_kk" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Akta Kelahiran</label>
+                    <input type="file" name="file_akta" class="form-control" accept=".png,.jpeg,.jpg" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Kartu Keluarga</label>
+                    <input type="file" name="file_kk" class="form-control" accept=".png,.jpeg,.jpg" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Ijazah TK</label>
+                    <input type="file" name="file_ijazah" class="form-control" accept=".png,.jpeg,.jpg" required>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btn-success">Simpan Data</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div class="modal fade" id="modalUbah" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <form action="handler/edit.php" method="POST" enctype="multipart/form-data">
+              <div class="modal-header">
+                <h5 class="modal-title">Ubah Data Siswa</h5>
+                <input type="hidden" name="id_biodata" />
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nama Siswa</label>
+                    <input type="text" name="nama_murid" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Umur Siswa</label>
+                    <input type="number" name="umur_murid" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" required/>
+                        <label class="form-check-label">Laki-Laki</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="jenis_kelamin" required/>
+                        <label class="form-check-label">Perempuan</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Tanggal Lahir</label>
+                    <div class="input-group">
+                      <input type="text" id="dateEdit" name="tanggal_lahir" class="form-control" required/>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Asal TK</label>
+                    <input type="text" name="asal_tk" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Alamat</label>
+                    <input type="text" name="alamat" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">NIK</label>
+                    <input type="text" name="nik" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">No. KK</label>
+                    <input type="text" name="no_kk" class="form-control" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Akta Kelahiran</label>
+                    <input type="file" name="file_akta" class="form-control" accept=".png,.jpeg,.jpg" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Kartu Keluarga</label>
+                    <input type="file" name="file_kk" class="form-control" accept=".png,.jpeg,.jpg" required/>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">File Ijazah TK</label>
+                    <input type="file" name="file_ijazah" class="form-control" accept=".png,.jpeg,.jpg" required/>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btn-success">Simpan Data</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Footer -->
+      <footer>
+        &copy; 2025 Creative Tim Inspired Layout. All rights reserved.
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+      flatpickr("#dateAdd", {
+        dateFormat: "Y-m-d",      // Output format
+        defaultDate: "2018-01-01" // Default date
+      });
+      flatpickr("#dateEdit", {
+        dateFormat: "Y-m-d",      // Output format
+        defaultDate: "2018-01-01" // Default date
+      });
+    </script>
+  </body>
+</html>

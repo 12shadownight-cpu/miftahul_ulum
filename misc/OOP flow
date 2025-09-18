@@ -1,0 +1,11 @@
+Form submission or page request
+        ↓
+     Handler (e.g. from index.php)
+        ↓
+   Controller (logic and flow)
+        ↓
+      Model (DB access)
+        ↓
+     Controller (back with data)
+        ↓
+        View (display)
