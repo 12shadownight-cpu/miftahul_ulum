@@ -121,8 +121,8 @@ class ValidasiData {
     public function getAllWithRelations() {
         try {
             $sql = "SELECT v.*, 
-                           u.nama_lengkap AS nama_user, 
-                           b.nama_lengkap AS nama_murid, 
+                           u.nama_user AS nama_user, 
+                           b.nama_murid AS nama_murid, 
                            o.nama_ayah
                     FROM {$this->table} v
                     JOIN data_user u ON v.id_user = u.id_user
@@ -147,8 +147,8 @@ class ValidasiData {
     public function getByIdWithRelations($id_validasi) {
         try {
             $sql = "SELECT v.*, 
-                           u.nama_lengkap AS nama_user, 
-                           b.nama_lengkap AS nama_murid, 
+                           u.nama_user AS nama_user, 
+                           b.nama_murid AS nama_murid, 
                            o.nama_ayah
                     FROM {$this->table} v
                     JOIN data_user u ON v.id_user = u.id_user
