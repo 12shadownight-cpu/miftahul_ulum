@@ -1,0 +1,9 @@
+# Deny direct web access to error logs
+<FilesMatch "php_errors\.log$">
+    Require all denied
+</FilesMatch>
+
+# For Apache <2.4 use:
+# <FilesMatch "php_errors\.log$">
+#     Deny from all
+# </FilesMatch>
