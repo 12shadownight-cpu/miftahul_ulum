@@ -17,7 +17,7 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg bg-light shadow-sm mb-3">
+        <nav class="navbar navbar-expand-lg shadow-sm mb-3" style="background-color: #b8b8f3;">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <!-- Left: Navbar Brand -->
                 <span class="navbar-brand mb-0 h1">
@@ -38,8 +38,8 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
         <!-- Main Content -->
         <div class="main-content container-fluid">
             <div class="px-3 py-2">
-                <h2 class="fw-bold mb-1">Data Table</h2>
-                <p class="text-muted">This table displays sample entries using DataTables plugin.</p>
+                <h2 class="fw-bold mb-1 text-decoration-underline">Halaman Biodata Orangtua</h2>
+                <p class="text-muted">Halaman ini bertujuan untuk menampilkan biodata orangtua yang telah tersimpan didalam database.</p>
             </div>
             <div class="card">
                 <div class="card-header bg-white" style="border-top: none; border-left: none; border-right: none;">
@@ -50,21 +50,9 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
                         <thead>
                             <tr>
                             <th>Nama Ayah</th>
-                            <th>Tempat Lahir Ayah</th>
-                            <th>Tanggal Lahir Ayah</th>
                             <th>Pekerjaan Ayah</th>
-                            <th>No. Handphone Ayah</th>
-                            <th>NIK Ayah</th>
-                            <th>No. KK ayah</th>
-                            <th>File KTP ayah</th>
                             <th>Nama Ibu</th>
-                            <th>Tempat Lahir Ibu</th>
-                            <th>Tanggal Lahir Ibu</th>
                             <th>Pekerjaan Ibu</th>
-                            <th>No. Handphone Ibu</th>
-                            <th>NIK Ibu</th>
-                            <th>No. KK Ibu</th>
-                            <th>File KTP Ibu</th>
                             <th>Aksi</th>
                             </tr>
                         </thead>
@@ -73,27 +61,12 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
                                 <?php foreach ($allOrangtua as $row): ?>
                                     <tr>
                                         <td><?= htmlspecialchars($row['nama_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['tempat_lahir_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['tanggal_lahir_ayah']) ?></td>
                                         <td><?= htmlspecialchars($row['pekerjaan_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['hp_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['nik_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['kk_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['file_ktp_ayah']) ?></td>
                                         <td><?= htmlspecialchars($row['nama_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['tempat_lahir_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['tanggal_lahir_ibu']) ?></td>
                                         <td><?= htmlspecialchars($row['pekerjaan_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['hp_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['nik_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['kk_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['file_ktp_ibu']) ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                <i class="bi bi-pencil-square me-1"></i>Edit
-                                            </button>
-                                            <button class="btn btn-sm btn-danger">
-                                                <a href="../../../controllers/orangtua/delete_orangtua_handler.php"><i class="bi bi-trash me-1"></i>Delete</a>
+                                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                                <i class="bi bi-info-circle me-1"></i>Info
                                             </button>
                                         </td>
                                     </tr>
@@ -110,11 +83,107 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
             </div>
         </div>
 
+        <!-- Info Modal -->
+        <div class="modal fade" id="infoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form enctype="multipart/form-data">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">
+                                Informasi Data Orangtua
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nama Ayah</label>
+                                    <input type="text" name="nama_ayah" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Nama Ibu</label>
+                                    <input type="text" name="nama_ibu" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Tempat Lahir Ayah</label>
+                                    <input type="text" name="tempat_lahir_ayah" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Tempat Lahir Ibu</label>
+                                    <input type="text" name="tempat_lahir_ibu" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Tanggal Lahir Ayah</label>
+                                    <div class="input-group">
+                                    <input type="text" name="tanggal_lahir_ayah" value="" class="form-control dateInput" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Tanggal Lahir Ibu</label>
+                                    <div class="input-group">
+                                    <input type="text" name="tanggal_lahir_ibu" value="" class="form-control dateInput" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Pekerjaan Ayah</label>
+                                    <input type="text" name="pekerjaan_ayah" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Pekerjaan Ibu</label>
+                                    <input type="text" name="pekerjaan_ibu" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">No. Handphone Ayah</label>
+                                    <input type="tel" name="hp_ayah" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">No. Handphone Ibu</label>
+                                    <input type="tel" name="hp_ibu" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">NIK Ayah</label>
+                                    <input type="text" name="nik_ayah" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">NIK Ibu</label>
+                                    <input type="text" name="nik_ibu" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">No. KK Ayah</label>
+                                    <input type="text" name="kk_ayah" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">No. KK Ibu</label>
+                                    <input type="text" name="kk_ibu" value="" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">File KTP Ayah</label>
+                                    <input type="file" name="file_ktp_ayah" class="form-control" accept=".png,.jpeg,.jpg">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">File KTP Ibu</label>
+                                    <input type="file" name="file_ktp_ibu" class="form-control" accept=".png,.jpeg,.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Sticky Footer -->
         <footer>
             &copy; 2025 Creative Tim Inspired Layout. All rights reserved.
         </footer>
     </div>
+
     <?php include '../../partials/footer/pengurus_footer.php'; ?>
+
+    <script>
+        //Prepare the table
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 </html>

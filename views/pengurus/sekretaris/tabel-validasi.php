@@ -17,7 +17,7 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg bg-light shadow-sm mb-3">
+        <nav class="navbar navbar-expand-lg shadow-sm mb-3" style="background-color: #b8b8f3;">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <!-- Left: Navbar Brand -->
                 <span class="navbar-brand mb-0 h1">
@@ -38,42 +38,36 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
         <!-- Main Content -->
         <div class="main-content container-fluid">
             <div class="px-3 py-2">
-                <h2 class="fw-bold mb-1">Data Table</h2>
-                <p class="text-muted">This table displays sample entries using DataTables plugin.</p>
+                <h2 class="fw-bold mb-1">text-decoration-underline</h2>
+                <p class="text-muted">Halaman ini bertujuan untuk menampilkan tabel hasil verifikasi terhadap data siswa.</p>
             </div>
             <div class="card">
                 <div class="card-header bg-white" style="border-top: none; border-left: none; border-right: none;">
-                    <h5 class="mb-0">Data Table Example</h5>
+                    <h5 class="mb-0">Daftar Hasil Verifikasi</h5>
                 </div>
                 <div class="card-body">
                     <table id="example" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                            <th>Action</th>
+                            <th>Nama Murid</th>
+                            <th>Hasil Validasi</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($datalist)) : ?>
-                                <?php foreach ($datalist as $row): ?>
+                            <?php if (!empty($allValidasi)) : ?>
+                                <?php foreach ($allValidasi as $row): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($row['name']) ?></td>
-                                        <td><?= htmlspecialchars($row['position']) ?></td>
-                                        <td><?= htmlspecialchars($row['office']) ?></td>
-                                        <td><?= htmlspecialchars($row['age']) ?></td>
-                                        <td><?= htmlspecialchars($row['start_date']) ?></td>
-                                        <td><?= htmlspecialchars($row['salary']) ?></td>
+                                        <td><?= htmlspecialchars($row['nama_murid']) ?></td>
+                                        <td><?= htmlspecialchars($row['hasil']) ?></td>
+                                        <td><?= htmlspecialchars($row['keterangan']) ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                                <i class="bi bi-pencil-square me-1"></i>Edit
+                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal">
+                                                <i class="bi bi-pencil-square me-1"></i>Ubah
                                             </button>
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash me-1"></i>Delete
+                                            <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_validasi'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                <i class="bi bi-trash me-1"></i>Hapus
                                             </button>
                                         </td>
                                     </tr>
@@ -83,25 +77,77 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
                                     <td colspan="7" class="text-center text-muted">No data available</td>
                                 </tr>
                             <?php endif; ?>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
-                                        <i class="bi bi-pencil-square me-1"></i>Edit
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash me-1"></i>Delete
-                                    </button>
-                                </td>
-                            </tr>
                             <!-- Add more rows if needed -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-warning text-white">
+                        <h5 class="modal-title" id="editModalLabel">
+                            Ubah Validasi
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form action="" method="post" id="editForm">
+                            <!-- Nama Siswa -->
+                            <div class="mb-3">
+                                <label class="form-label">Nama Siswa</label>
+                                <select class="form-select" name="nama_murid" required>
+                                    <option value="">~ Pilih ~</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="sekretaris">Sekretaris</option>
+                                </select>
+                            </div>
+                            <!-- Hasil Validasi -->
+                            <div class="mb-3">
+                                <label class="form-label">Hasil Validasi</label>
+                                <select class="form-select" name="hasil" required>
+                                    <option value="">~ Pilih ~</option>
+                                    <option value="diterima">Diterima</option>
+                                    <option value="ditolak">Ditolak</option>
+                                </select>
+                            </div>
+                            <!-- Keterangan -->
+                            <div class="mb-3">
+                                <label class="form-label">Keterangan</label>
+                                <input type="text" class="form-control" name="keterangan" required/>
+                            </div>
+                            <!-- Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-warning px-4">Ubah Data</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content">
+                    <form action="" method="post">
+                        <div class="modal-header bg-danger">
+                            <h5 class="modal-title">Konfirmasi</h5>
+                            <input type="hidden" name="id_validasi" id="deleteId">
+                        </div>
+                        <div class="modal-body text-center">
+                            Yakin ingin Menghapus Data?
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger" id="confirmDelete">Hapus</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -111,6 +157,22 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
             &copy; 2025 Creative Tim Inspired Layout. All rights reserved.
         </footer>
     </div>
+
     <?php include '../../partials/footer/pengurus_footer.php'; ?>
+
+    <script>
+        //Prepare the table
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+        // when delete button clicked
+        document.querySelectorAll('.deleteBtn').forEach(btn => {
+            btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            document.getElementById('deleteId').value = id;
+            });
+        });
+    </script>
 </body>
 </html>
