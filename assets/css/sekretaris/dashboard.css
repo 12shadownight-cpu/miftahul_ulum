@@ -1,0 +1,179 @@
+html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .info-box-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .info-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 15px 20px;
+      flex: 0 0 250px; /* fixed width instead of stretching */
+      max-width: 250px; /* limit max size */
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .info-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-box .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      margin-right: 15px;
+    }
+
+    .info-box .content h4 {
+      margin: 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .info-box .content p {
+      margin: 5px 0 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    /* Colors */
+    .bg-green {
+      background: #28a745;
+    }
+    .bg-yellow {
+      background: #ffc107;
+    }
+
+    .d-flex .card + .card {
+      margin-left: 80px; /* adjust the px value as needed */
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #f44336, #b71c1c);
+      color: white;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar .brand {
+      padding: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link {
+      color: white;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+    }
+
+    .nav-link i {
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .collapse .nav-link {
+      padding-left: 3.5rem;
+      font-size: 0.95rem;
+    }
+
+    .upgrade-btn {
+      margin: auto 1.5rem 1.5rem 1.5rem;
+      padding: 0.6rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .upgrade-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Wrapper for navbar + main content + footer */
+    .main-wrapper {
+      margin-left: 250px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 1rem;
+    }
+
+    .no-border {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .row.gx-custom {
+      --bs-gutter-x: 1rem; /* adjust value */
+    }
+
+
+    footer {
+      background-color: #b8b8f3;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid #dee2e6;
+    }
+
+    #pieChart1,
+    #pieChart2 {
+      width: 200px !important;
+      height: 200px !important;
+      margin: 0 auto; /* keeps chart centered inside the card */
+      display: block;
+    }
