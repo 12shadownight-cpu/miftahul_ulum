@@ -8,7 +8,7 @@ $db = (new Database())->connect();
 $controller = new ValidasiController($db);
 
 // Ambil semua data validasi beserta relasi
-$allPengumuman = $controller->getAllWithRelations();
+$allValidasi = $controller->getAllWithRelations();
 
 // Tampilkan di view
 include __DIR__ . '/../../views/pengurus/sekretaris/tabel-validasi.php';

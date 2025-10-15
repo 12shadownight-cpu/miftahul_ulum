@@ -1,4 +1,6 @@
 <?php
+// Start Session
+session_start();
 
 // Load database configuration
 require_once __DIR__ . '/../../config/Database.php';
@@ -29,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect to appropriate page
     $redirect = $result['success']
-        ? '../views/user/login.php'
-        : '../views/user/register.php';
+        ? '../../views/user/login.php'
+        : '../../views/user/register.php';
 
     header("Location: $redirect");
     exit;
 } else {
     // If accessed without POST, redirect back to register
-    header('Location: ../views/user/register.php');
+    header('Location: ../../views/user/register.php');
     exit;
 }
 ?>

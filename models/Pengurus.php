@@ -131,11 +131,19 @@ class Pengurus {
                 $password_sql = "";
             }
 
-            $sql = "UPDATE {$this->table}
-                    SET nama_pengurus = :nama, username = :username,
-                        email = :email, no_hp = :no_hp, 
-                        status = :status, ".$password_sql."
-                    WHERE id_pengurus = :id_pengurus";
+            $fields = [
+                'nama_pengurus = :nama',
+                'username = :username',
+                'email = :email',
+                'no_hp = :no_hp',
+                'status = :status'
+            ];
+
+            if (!empty($password)) {
+                $fields[] = 'password = :password';
+            }
+
+            $sql = "UPDATE {$this->table} SET " . implode(', ', $fields) . " WHERE id_pengurus = :id_pengurus";
 
             $stmt = $this->conn->prepare($sql);
 

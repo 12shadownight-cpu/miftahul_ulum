@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $result = $controller->delete($id, $_SESSION['pengurus_status']);
 
     $_SESSION['message'] = $result['message'];
-    header('Location: ../views/pengurus/admin/data-pengurus.php');
+    header('Location: ../../views/pengurus/admin/data-pengurus.php');
     exit;
 } else {
-    header('Location: ../views/pengurus/admin/data-pengurus.php');
+    header('Location: ../../views/pengurus/admin/data-pengurus.php');
     exit;
 }
 

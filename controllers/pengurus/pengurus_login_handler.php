@@ -20,23 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Redirect based on role
         if ($status === 'admin') {
-            header('Location: ../views/pengurus/admin/dashboard.php');
+            header('Location: ../../views/pengurus/admin/dashboard.php');
         } elseif ($status === 'sekretaris') {
-            header('Location: ../views/pengurus/sekretaris/dashboard.php');
+            header('Location: ../../views/pengurus/sekretaris/dashboard.php');
         } else {
             $_SESSION['message'] = 'Status pengurus tidak valid!';
-            header('Location: ../views/pengurus/login.php');
+            header('Location: ../../views/pengurus/login.php');
         }
         exit;
     } else {
         // Redirect back with error
         $_SESSION['message'] = $result['message'];
-        header('Location: ../views/pengurus/login.php');
+        header('Location: ../../views/pengurus/login.php');
         exit;
     }
     exit;
 } else {
-    header('Location: ../views/pengurus/login.php');
+    header('Location: ../../views/pengurus/login.php');
     exit;
 }
 

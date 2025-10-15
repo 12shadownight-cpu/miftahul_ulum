@@ -97,7 +97,7 @@ class BiodataOrangtua {
      * @param string|null $file_ktp_ibu
      * @return bool
      */
-    public function update($id_orangtua, $nama_ayah, $tempat_lahir_ayah, $tanggal_lahir_ayah, $pekerjaan_ayah, $hp_ayah, $nik_ayah, $kk_ayah, $file_ktp_ayah = null, $nama_ibu, $tempat_lahir_ibu, $tanggal_lahir_ibu, $pekerjaan_ibu, $hp_ibu, $nik_ibu, $kk_ibu, $file_ktp_ibu = null) {
+    public function update($id_orangtua, $nama_ayah, $tempat_lahir_ayah, $tanggal_lahir_ayah, $pekerjaan_ayah, $hp_ayah, $nik_ayah, $kk_ayah, $nama_ibu, $tempat_lahir_ibu, $tanggal_lahir_ibu, $pekerjaan_ibu, $hp_ibu, $nik_ibu, $kk_ibu, $file_ktp_ayah = null, $file_ktp_ibu = null) {
         try {
             $sql = "UPDATE {$this->table} SET
                         nama_ayah = :nama_ayah,
@@ -174,7 +174,7 @@ class BiodataOrangtua {
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($data) {
-                $uploadDir = __DIR__ . '/../../assets/uploads/';
+                $uploadDir = __DIR__ . '/../assets/uploads/';
                 foreach (['file_ktp_ayah', 'file_ktp_ibu'] as $field) {
                     if (!empty($data[$field])) {
                         $filePath = $uploadDir . $data[$field];

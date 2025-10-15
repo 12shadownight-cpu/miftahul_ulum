@@ -8,6 +8,6 @@ $db = (new Database())->connect();
 $controller = new UserController($db);
 
 $controller->logout();
-header('Location: ../views/user/login.php');
+header('Location: ../../views/user/login.php');
 exit;
 ?>

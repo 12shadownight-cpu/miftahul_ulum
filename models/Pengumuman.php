@@ -164,14 +164,14 @@ class Pengumuman {
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($data) {
-                $uploadDir = __DIR__ . '/../../assets/uploads/';
+                $uploadDir = __DIR__ . '/../assets/uploads/';
                 foreach (['file_pendukung'] as $field) {
                     if (!empty($data[$field])) {
                         $filePath = $uploadDir . $data[$field];
                         // Delete only if file exists
                         if (is_file($filePath)) {
                             if (!unlink($filePath)) {
-                                error_log("BiodataMurid delete file error: Could not delete {$filePath}");
+                                error_log("Pengumuman delete file error: Could not delete {$filePath}");
                             }
                         }
                     }

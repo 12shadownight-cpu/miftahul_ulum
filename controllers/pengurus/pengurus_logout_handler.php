@@ -9,8 +9,7 @@ $controller = new PengurusController($db);
 
 $result = $controller->logout();
 
-session_start();
 $_SESSION['message'] = $result['message'] ?? 'Logout berhasil.';
-header('Location: ../views/pengurus/login.php');
+header('Location: ../../views/pengurus/login.php');
 exit;
 

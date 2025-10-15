@@ -22,16 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result['success']) {
         // Redirect back to admin dashboard with success
         $_SESSION['message'] = $result['message'];
-        header('Location: ../views/pengurus/admin/data-pengurus.php');
+        header('Location: ../../views/pengurus/admin/data-pengurus.php');
         exit;
     } else {
         // Redirect back to registration form with error
         $_SESSION['message'] = $result['message'];
-        header('Location: ../views/pengurus/admin/input-pengurus.php');
+        header('Location: ../../views/pengurus/admin/input-pengurus.php');
         exit;
     }
 } else {
-    header('Location: ../views/pengurus/admin/input-pengurus.php');
+    header('Location: ../../views/pengurus/admin/input-pengurus.php');
     exit;
 }
 

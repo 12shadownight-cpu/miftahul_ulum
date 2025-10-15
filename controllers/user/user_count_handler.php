@@ -10,5 +10,5 @@ $controller = new UserController($db);
 $totalUsers = $controller->getTotalUsers();
 
 // Include them in Dashboard
-include __DIR__ . '/../../views/pengurus/admin/dashboard.php'
+include __DIR__ . '/../../views/pengurus/admin/dashboard.php';
 ?>
