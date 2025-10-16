@@ -68,19 +68,30 @@ if (session_status() == PHP_SESSION_NONE) {
       margin-bottom: 6px;
     }
 
-    .form-group input[type="text"],
-    .form-group input[type="password"] {
-      width: 100%;
-      padding: 10px 12px;
-      border: 2px solid #000;
-      border-radius: 6px;
-      font-size: 16px;
-      transition: border-color 0.2s;
+    .password-wrapper {
+      position: relative;
     }
 
-    .form-group input:focus {
-      border-color: #1a30b3;
-      outline: none;
+    .password-wrapper input {
+      padding-right: 90px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #2f80ed;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .toggle-password:focus-visible {
+      outline: 2px solid #1a30b3;
+      outline-offset: 2px;
     }
 
     .login-btn {
@@ -152,7 +163,10 @@ if (session_status() == PHP_SESSION_NONE) {
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Masukkan password" required />
+        <div class="password-wrapper">
+          <input type="password" name="password" id="password" placeholder="Masukkan password" required />
+          <button type="button" class="toggle-password" aria-label="Tampilkan password" aria-pressed="false">Show</button>
+        </div>
       </div>
 
       <div class="form-group">
@@ -172,5 +186,34 @@ if (session_status() == PHP_SESSION_NONE) {
   <footer>
     &copy; 2025 Dash UI. All rights reserved.
   </footer>
+
+  <script>
+    // Wait until the page is fully loaded
+    window.addEventListener('DOMContentLoaded', () => {
+      const alertBox = document.querySelector('.alert-box');
+      if (alertBox) {
+        setTimeout(() => {
+          alertBox.style.transition = 'opacity 0.6s ease';
+          alertBox.style.opacity = '0';
+          setTimeout(() => {
+            alertBox.style.display = 'none';
+          }, 600); // Match the transition duration
+        }, 3000); // Wait 3 seconds before fading out
+      }
+
+      const passwordInput = document.querySelector('#password');
+      const toggleButton = document.querySelector('.toggle-password');
+
+      if (passwordInput && toggleButton) {
+        toggleButton.addEventListener('click', () => {
+          const isHidden = passwordInput.type === 'password';
+          passwordInput.type = isHidden ? 'text' : 'password';
+          toggleButton.textContent = isHidden ? 'Hide' : 'Show';
+          toggleButton.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
+          toggleButton.setAttribute('aria-label', isHidden ? 'Sembunyikan password' : 'Tampilkan password');
+        });
+      }
+    });
+  </script>
 </body>
 </html>

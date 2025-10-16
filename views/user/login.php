@@ -85,6 +85,32 @@ if (session_status() == PHP_SESSION_NONE) {
       outline: none;
     }
 
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 90px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #2f80ed;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .toggle-password:focus-visible {
+      outline: 2px solid #1a30b3;
+      outline-offset: 2px;
+    }
+
     .login-btn {
       display: block;
       width: 100%;
@@ -149,7 +175,10 @@ if (session_status() == PHP_SESSION_NONE) {
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Masukkan password" required />
+        <div class="password-wrapper">
+          <input type="password" name="password" id="password" placeholder="Masukkan password" required />
+          <button type="button" class="toggle-password" aria-label="Tampilkan password" aria-pressed="false">Show</button>
+        </div>
       </div>
 
       <div class="footer-links">
@@ -176,6 +205,19 @@ if (session_status() == PHP_SESSION_NONE) {
             alertBox.style.display = 'none';
           }, 600); // Match the transition duration
         }, 3000); // Wait 3 seconds before fading out
+      }
+
+      const passwordInput = document.querySelector('#password');
+      const toggleButton = document.querySelector('.toggle-password');
+
+      if (passwordInput && toggleButton) {
+        toggleButton.addEventListener('click', () => {
+          const isHidden = passwordInput.type === 'password';
+          passwordInput.type = isHidden ? 'text' : 'password';
+          toggleButton.textContent = isHidden ? 'Hide' : 'Show';
+          toggleButton.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
+          toggleButton.setAttribute('aria-label', isHidden ? 'Sembunyikan password' : 'Tampilkan password');
+        });
       }
     });
   </script>
