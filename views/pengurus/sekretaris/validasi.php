@@ -44,7 +44,7 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
         <div class="card mx-auto" style="max-width: 400px">
           <div class="card">
             <div class="card-body">
-              <form action="" method="post">
+              <form action="../../../controllers/validasi/add_validasi_handler.php" method="post">
                 <!-- Nama Siswa -->
                 <div class="mb-3">
                   <label class="form-label">Nama Murid</label>

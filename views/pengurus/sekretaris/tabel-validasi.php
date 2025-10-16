@@ -97,7 +97,7 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <form action="" method="post" id="editForm">
+                        <form action="../../../controllers/validasi/edit_validasi_handler.php" method="post" id="editForm">
                             <!-- Nama Siswa -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Siswa</label>
@@ -135,7 +135,7 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
         <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content">
-                    <form action="" method="post">
+                    <form action="../../../controllers/validasi/delete_validasi_handler.php" method="post">
                         <div class="modal-header bg-danger">
                             <h5 class="modal-title">Konfirmasi</h5>
                             <input type="hidden" name="id_validasi" id="deleteId">

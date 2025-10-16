@@ -44,7 +44,7 @@ if ($_SESSION['pengurus_status'] !== 'admin') {
         <div class="card mx-auto" style="max-width: 400px">
           <div class="card">
             <div class="card-body">
-              <form>
+              <form action="../../../controllers/pengurus/add_pengurus_handler.php" method="post">
                 <!-- Nama Lengkap -->
                 <div class="mb-3">
                   <label class="form-label">Nama Lengkap</label>

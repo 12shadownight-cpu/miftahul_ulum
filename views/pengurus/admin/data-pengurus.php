@@ -97,7 +97,7 @@ if ($_SESSION['pengurus_status'] !== 'admin') {
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <form action="" method="post" id="editForm">
+                        <form action="../../../controllers/pengurus/edit_pengurus_handler.php" method="post" id="editForm">
                             <input type="hidden" name="id_pengurus">
                             <!-- Nama Lengkap -->
                             <div class="mb-3">
@@ -154,7 +154,7 @@ if ($_SESSION['pengurus_status'] !== 'admin') {
         <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content">
-                    <form action="" method="post">
+                    <form action="../../../controllers/pengurus/delete_pengurus_handler.php" method="post">
                         <div class="modal-header bg-danger">
                             <h5 class="modal-title">Konfirmasi</h5>
                             <input type="hidden" name="id_pengurus" id="deleteId">
