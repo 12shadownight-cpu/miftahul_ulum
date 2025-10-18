@@ -22,8 +22,8 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                 </span>
                 <!-- Right: User & Logout -->
                 <div class="d-flex align-items-center">
-                    <span class="me-3 fw-semibold"> John Doe </span>
-                    <a href="logout.php" class="btn btn-outline-danger btn-sm">
+                    <span class="me-3 fw-semibold"><?= htmlspecialchars($userName) ?></span>
+                    <a href="../../controllers/user/user_logout_handler.php" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>
                 </div>
@@ -220,11 +220,11 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                                     <label class="form-label">Jenis Kelamin</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jenis_kelamin" required/>
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" required/>
                                         <label class="form-check-label">Laki-Laki</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jenis_kelamin" required/>
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" required/>
                                         <label class="form-check-label">Perempuan</label>
                                         </div>
                                     </div>

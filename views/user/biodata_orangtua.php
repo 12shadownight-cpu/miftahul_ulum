@@ -22,8 +22,8 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                 </span>
                 <!-- Right: User & Logout -->
                 <div class="d-flex align-items-center">
-                    <span class="me-3 fw-semibold"> John Doe </span>
-                    <a href="logout.php" class="btn btn-outline-danger btn-sm">
+                    <span class="me-3 fw-semibold"><?= htmlspecialchars($userName) ?></span>
+                    <a href="../../controllers/user/user_logout_handler.php" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>
                 </div>

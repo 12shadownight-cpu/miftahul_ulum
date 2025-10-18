@@ -4,7 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
-if ($_SESSION['pengurus_status'] !== 'admin') {
+$status = $_SESSION['pengurus_status'] ?? null;
+if ($status !== 'admin') {
     header('Location: ../../public/index.php');
     exit;
 }
@@ -28,10 +29,8 @@ if ($_SESSION['pengurus_status'] !== 'admin') {
 
                 <!-- Right: User & Logout -->
                 <div class="d-flex align-items-center">
-                    <span class="me-3 fw-semibold">
-                        John Doe
-                    </span>
-                    <a href="logout.php" class="btn btn-outline-danger btn-sm">
+                    <span class="me-3 fw-semibold"><?= htmlspecialchars($pengurusName) ?></span>
+                    <a href="../../../controllers/pengurus/pengurus_logout_handler.php" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>
                 </div>
@@ -59,19 +58,21 @@ if ($_SESSION['pengurus_status'] !== 'admin') {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Result List</td>
-                                <td>24 September 2025</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal">
-                                    <i class="bi bi-pencil-square me-1"></i>Ubah
-                                    </button>
-                                    <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_pengumuman'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                    <i class="bi bi-trash me-1"></i>Hapus
-                                    </button>
-                                </td>
-                            </tr>
+                            <?php foreach ($allPengumuman as $row) : ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['nama_pengurus']) ?></td>
+                                    <td><?= htmlspecialchars($row['judul']) ?></td>
+                                    <td><?= htmlspecialchars($row['waktu_terbit']) ?></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="bi bi-pencil-square me-1"></i>Ubah
+                                        </button>
+                                        <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_pengumuman'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <i class="bi bi-trash me-1"></i>Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                             <!-- Add more rows if needed -->
                         </tbody>
                     </table>

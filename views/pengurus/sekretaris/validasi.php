@@ -4,7 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
-if ($_SESSION['pengurus_status'] !== 'sekretaris') {
+$status = $_SESSION['pengurus_status'] ?? null;
+if ($status !== 'sekretaris') {
     header('Location: ../../public/index.php');
     exit;
 }
@@ -27,8 +28,8 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
 
           <!-- Right: User & Logout -->
           <div class="d-flex align-items-center">
-            <span class="me-3 fw-semibold"> John Doe </span>
-            <a href="logout.php" class="btn btn-outline-danger btn-sm">
+            <span class="me-3 fw-semibold"><?= htmlspecialchars($pengurusName) ?></span>
+            <a href="../../../controllers/pengurus/pengurus_logout_handler.php" class="btn btn-outline-danger btn-sm">
               <i class="bi bi-box-arrow-right me-1"></i> Logout
             </a>
           </div>
@@ -50,8 +51,11 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
                   <label class="form-label">Nama Murid</label>
                   <select class="form-select" name="nama_murid" required>
                     <option value="">~ Pilih ~</option>
-                    <option value="admin">Admin</option>
-                    <option value="sekretaris">Sekretaris</option>
+                    <?php foreach ($allMurid as $murid): ?>
+                        <option value="<?= htmlspecialchars($murid['id_murid']) ?>">
+                            <?= htmlspecialchars($murid['nama_murid']) ?>
+                        </option>
+                    <?php endforeach; ?>
                   </select>
                 </div>
                 <!-- Hasil Validasi -->
@@ -85,20 +89,5 @@ if ($_SESSION['pengurus_status'] !== 'sekretaris') {
     </div>
 
     <?php include '../../partials/footer/pengurus_footer.php'; ?>
-
-    <script>
-      const togglePassword = document.querySelector("#togglePassword");
-      const password = document.querySelector("#password");
-      const iconPassword = document.querySelector("#iconPassword");
-
-      togglePassword.addEventListener("click", function () {
-        const type = password.getAttribute("type") === "password" ? "text" : "password";
-        password.setAttribute("type", type);
-
-        // Toggle icon
-        iconPassword.classList.toggle("bi-eye");
-        iconPassword.classList.toggle("bi-eye-slash");
-      });
-    </script>
 </body>
 </html>

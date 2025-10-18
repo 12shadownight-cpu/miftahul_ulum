@@ -14,7 +14,7 @@
     </div>
     <!-- Expandable Dropdown -->
     <a class="nav-link" data-bs-toggle="collapse" href="#checkLayouts" role="button">
-      <i class="bi bi-folder-check"></i></i>Verifikasi Data
+      <i class="bi bi-folder-check"></i>Verifikasi Data
       <i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <div class="collapse" id="checkLayouts">

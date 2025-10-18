@@ -4,7 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
-if ($_SESSION['pengurus_status'] !== 'admin') {
+$status = $_SESSION['pengurus_status'] ?? null;
+if ($status !== 'admin') {
     header('Location: ../../public/index.php');
     exit;
 }
@@ -25,9 +26,7 @@ if ($_SESSION['pengurus_status'] !== 'admin') {
                 </span>
                 <!-- Right: User & Logout -->
                 <div class="d-flex align-items-center">
-                    <span class="me-3 fw-semibold">
-                        <?= $pengurusName ?>
-                    </span>
+                    <span class="me-3 fw-semibold"><?= htmlspecialchars($pengurusName) ?></span>
                     <a href="../../../controllers/pengurus/pengurus_logout_handler.php" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>

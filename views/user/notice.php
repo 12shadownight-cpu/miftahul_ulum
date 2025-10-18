@@ -44,10 +44,8 @@ function timeAgo($datetime) {
                 </span>
                 <!-- Right: User & Logout -->
                 <div class="d-flex align-items-center">
-                    <span class="me-3 fw-semibold">
-                        John Doe
-                    </span>
-                    <a href="logout.php" class="btn btn-outline-danger btn-sm">
+                    <span class="me-3 fw-semibold"><?= htmlspecialchars($userName) ?></span>
+                    <a href="../../controllers/user/user_logout_handler.php" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>
                 </div>
@@ -62,32 +60,24 @@ function timeAgo($datetime) {
             </div>
             <!-- Announcement list (static HTML instead of JS injection) -->
             <div id="announcement-list">
-                <!-- Announcement 1 -->
-                <div class="card announcement-card">
-                    <div class="card-body">
-                        <h5 class="card-title">System Maintenance</h5>
-                        <p class="card-text">Our system will be under maintenance on Saturday from 1AM to 4AM. https://bit.ly/4pCNIxt</p>
-                        <p class="attachment">📎 <a href="#">maintenance_schedule.pdf</a></p>
-                        <p class="timestamp">Published: <?= timeAgo($row['waktu_terbit']) ?> By Admin</p>
+                <!-- Announcement list -->
+                <?php foreach ($announcement as $row): ?>
+                    <div class="card announcement-card" id="announcement<?= $row['id_pengumuman'] ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($row['judul']) ?></h5>
+                            <p class="card-text"><?= htmlspecialchars($row['deskripsi']) ?></p>
+                            <?php if (!empty($row['file_url'])): ?>
+                                <p class="attachment">
+                                    <i class="bi bi-paperclip"></i>
+                                    <a href="<?= htmlspecialchars($row['file_url']) ?>" target="_blank" rel="noopener noreferrer">
+                                        <?= htmlspecialchars($row['nama_file']) ?>
+                                    </a>
+                                </p>
+                            <?php endif; ?>
+                            <p class="timestamp" data-time="<?= htmlspecialchars($row['waktu_terbit']) ?>">Published: <?= timeAgo($row['waktu_terbit']) ?> By <?= htmlspecialchars($row['nama_pengurus']) ?></p>
+                        </div>
                     </div>
-                </div>
-                <!-- Announcement 2 -->
-                <div class="card announcement-card">
-                    <div class="card-body">
-                        <h5 class="card-title">New Feature Release</h5>
-                        <p class="card-text">We are excited to announce a new dashboard feature available starting next week.</p>
-                        <p class="attachment">📎 <a href="#">release_notes.pdf</a></p>
-                        <p class="timestamp">Published: <?= timeAgo($row['waktu_terbit']) ?> by Admin</p>
-                    </div>
-                </div>
-                <!-- Announcement 3 -->
-                <div class="card announcement-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Holiday Notice</h5>
-                        <p class="card-text">Our office will be closed on Independence Day.</p>
-                        <p class="timestamp">Published: <?= timeAgo($row['waktu_terbit']) ?> By Admin</p>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
 

@@ -4,7 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
-if ($_SESSION['pengurus_status'] !== 'sekretaris') {
+$status = $_SESSION['pengurus_status'] ?? null;
+if ($status !== 'sekretaris') {
     header('Location: ../../public/index.php');
     exit;
 }
@@ -47,8 +48,8 @@ $allVoid = ($totals['laki-laki'] == 0 && $totals['perempuan'] == 0);
 
                 <!-- Right: User & Logout -->
                 <div class="d-flex align-items-center">
-                    <span class="me-3 fw-semibold"> John Doe </span>
-                    <a href="logout.php" class="btn btn-outline-danger btn-sm">
+                    <span class="me-3 fw-semibold"><?= htmlspecialchars($pengurusName) ?></span>
+                    <a href="../../../controllers/pengurus/pengurus_logout_handler.php" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Logout
                     </a>
                 </div>
@@ -122,9 +123,11 @@ $allVoid = ($totals['laki-laki'] == 0 && $totals['perempuan'] == 0);
     <?php include '../../partials/footer/pengurus_footer.php'; ?>
     <script>
         const counts = <?= json_encode($counts) ?>;
+        const totals = <?= json_encode($totals) ?>;
         const allZero = <?= $allZero ? 'true' : 'false' ?>;
+        const allVoid = <?= $allVoid ? 'true' : 'false' ?>;
 
-        new Chart(document.getElementById('validasiChart'), {
+        new Chart(document.getElementById('pieChart1'), {
             type: 'pie',
             data: {
                 labels: ['Diterima', 'Ditolak'],
@@ -140,18 +143,15 @@ $allVoid = ($totals['laki-laki'] == 0 && $totals['perempuan'] == 0);
                 plugins: { legend: { position: 'bottom' } }
             }
         });
-
-        const totals = <?= json_encode($totals) ?>;
-        const allVoid = <?= $allVoid ? 'true' : 'false' ?>;
         
-        new Chart(document.getElementById('muridChart'), {
+        new Chart(document.getElementById('pieChart2'), {
             type: 'pie',
             data: {
                 labels: ['Laki-Laki', 'Perempuan'],
                 datasets: [{
                     label: 'Jenis Kelamin',
-                    data: [counts.laki-laki, counts.perempuan],
-                    backgroundColor: allZero ? ['#FFFFFF', '#FFFFFF'] : ['#54EF36FF', '#F5FF63FF'],
+                    data: [totals['laki-laki'], totals.perempuan],
+                    backgroundColor: allVoid ? ['#FFFFFF', '#FFFFFF'] : ['#54EF36FF', '#F5FF63FF'],
                     borderColor: '#ccc'
                 }]
             },

@@ -12,4 +12,5 @@ $allMurid = $controller->getAll();
 
 // Tamplikan pada view
 include __DIR__ . '/../../views/pengurus/sekretaris/data-murid.php';
+include __DIR__ . '/../../views/pengurus/sekretaris/validasi.php';
 ?>
