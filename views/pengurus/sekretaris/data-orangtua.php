@@ -64,7 +64,24 @@ if ($status !== 'sekretaris') {
                                         <td><?= htmlspecialchars($row['nama_ibu']) ?></td>
                                         <td><?= htmlspecialchars($row['pekerjaan_ibu']) ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                            <button class="btn btn-sm btn-info me-1 infoBtn" data-bs-toggle="modal" data-bs-target="#infoModal"
+                                            data-id="<?= htmlspecialchars($row['id_orangtua'], ENT_QUOTES) ?>"
+                                            data-na="<?= htmlspecialchars($row['nama_ayah'], ENT_QUOTES) ?>"
+                                            data-ni="<?= htmlspecialchars($row['nama_ibu'], ENT_QUOTES) ?>"
+                                            data-tela="<?= htmlspecialchars($row['tempat_lahir_ayah'], ENT_QUOTES) ?>"
+                                            data-teli="<?= htmlspecialchars($row['tempat_lahir_ibu'], ENT_QUOTES) ?>"
+                                            data-tala="<?= htmlspecialchars($row['tanggal_lahir_ayah'], ENT_QUOTES) ?>"
+                                            data-tali="<?= htmlspecialchars($row['tanggal_lahir_ibu'], ENT_QUOTES) ?>"
+                                            data-pa="<?= htmlspecialchars($row['pekerjaan_ayah'], ENT_QUOTES) ?>"
+                                            data-pi="<?= htmlspecialchars($row['pekerjaan_ibu'], ENT_QUOTES) ?>"
+                                            data-ha="<?= htmlspecialchars($row['hp_ayah'], ENT_QUOTES) ?>"
+                                            data-hi="<?= htmlspecialchars($row['hp_ibu'], ENT_QUOTES) ?>"
+                                            data-nia="<?= htmlspecialchars($row['nik_ayah'], ENT_QUOTES) ?>"
+                                            data-nii="<?= htmlspecialchars($row['nik_ibu'], ENT_QUOTES) ?>"
+                                            data-ka="<?= htmlspecialchars($row['kk_ayah'], ENT_QUOTES) ?>"
+                                            data-ki="<?= htmlspecialchars($row['kk_ibu'], ENT_QUOTES) ?>"
+                                            data-kta="<?= htmlspecialchars($row['file_ktp_ayah'], ENT_QUOTES) ?>"
+                                            data-kti="<?= htmlspecialchars($row['file_ktp_ibu'], ENT_QUOTES) ?>">
                                                 <i class="bi bi-info-circle me-1"></i>Info
                                             </button>
                                         </td>
@@ -72,7 +89,7 @@ if ($status !== 'sekretaris') {
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7" class="text-center text-muted">No data available</td>
+                                    <td colspan="7" class="text-center text-muted">Tidak ada data tersimpan</td>
                                 </tr>
                             <?php endif; ?>
                             <!-- Add more rows if needed -->
@@ -95,73 +112,74 @@ if ($status !== 'sekretaris') {
                         </div>
                         <div class="modal-body">
                             <div class="row g-3">
+                                <input type="hidden" id="infoId">
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Ayah</label>
-                                    <input type="text" name="nama_ayah" value="" class="form-control" readonly>
+                                    <input type="text" id="infoNamaAyah" name="nama_ayah" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Ibu</label>
-                                    <input type="text" name="nama_ibu" value="" class="form-control" readonly>
+                                    <input type="text" id="infoNamaIbu" name="nama_ibu" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir Ayah</label>
-                                    <input type="text" name="tempat_lahir_ayah" value="" class="form-control" readonly>
+                                    <input type="text" id="infoTempatAyah" name="tempat_lahir_ayah" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir Ibu</label>
-                                    <input type="text" name="tempat_lahir_ibu" value="" class="form-control" readonly>
+                                    <input type="text" id="infoTempatIbu" name="tempat_lahir_ibu" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ayah</label>
                                     <div class="input-group">
-                                    <input type="text" name="tanggal_lahir_ayah" value="" class="form-control dateInput" readonly>
+                                    <input type="text" id="infoLahirAyah" name="tanggal_lahir_ayah" class="form-control dateInput" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ibu</label>
                                     <div class="input-group">
-                                    <input type="text" name="tanggal_lahir_ibu" value="" class="form-control dateInput" readonly>
+                                    <input type="text" id="infoLahirIbu" name="tanggal_lahir_ibu" class="form-control dateInput" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Pekerjaan Ayah</label>
-                                    <input type="text" name="pekerjaan_ayah" value="" class="form-control" readonly>
+                                    <input type="text" id="infoKerjaAyah" name="pekerjaan_ayah" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Pekerjaan Ibu</label>
-                                    <input type="text" name="pekerjaan_ibu" value="" class="form-control" readonly>
+                                    <input type="text" id="infoKerjaIbu" name="pekerjaan_ibu" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. Handphone Ayah</label>
-                                    <input type="tel" name="hp_ayah" value="" class="form-control" readonly>
+                                    <input type="tel" id="infoNoAyah" name="hp_ayah" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. Handphone Ibu</label>
-                                    <input type="tel" name="hp_ibu" value="" class="form-control" readonly>
+                                    <input type="tel" id="infoNoIbu" name="hp_ibu" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK Ayah</label>
-                                    <input type="text" name="nik_ayah" value="" class="form-control" readonly>
+                                    <input type="text" id="infoNikAyah" name="nik_ayah" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK Ibu</label>
-                                    <input type="text" name="nik_ibu" value="" class="form-control" readonly>
+                                    <input type="text" id="infoNikIbu" name="nik_ibu" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK Ayah</label>
-                                    <input type="text" name="kk_ayah" value="" class="form-control" readonly>
+                                    <input type="text" id="infoKkAyah" name="kk_ayah" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK Ibu</label>
-                                    <input type="text" name="kk_ibu" value="" class="form-control" readonly>
+                                    <input type="text" id="infoKkIbu" name="kk_ibu" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File KTP Ayah</label>
-                                    <input type="file" name="file_ktp_ayah" class="form-control" accept=".png,.jpeg,.jpg">
+                                    <div id="infoKtpAyah" class="small">-</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File KTP Ibu</label>
-                                    <input type="file" name="file_ktp_ibu" class="form-control" accept=".png,.jpeg,.jpg">
+                                    <div id="infoKtpIbu" class="small">-</div>
                                 </div>
                             </div>
                         </div>
@@ -183,6 +201,42 @@ if ($status !== 'sekretaris') {
         $(document).ready(function () {
             $('#example').DataTable();
         });
+
+        //When info button clicked
+        const infoModal = document.getElementById('infoModal');
+        if (infoModal) {
+            infoModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                document.getElementById('infoId').value = button.dataset.id || '';
+                document.getElementById('infoNamaAyah').value = button.dataset.na || '';
+                document.getElementById('infoNamaIbu').value = button.dataset.ni || '';
+                document.getElementById('infoTempatAyah').value = button.dataset.tela || '';
+                document.getElementById('infoTempatIbu').value = button.dataset.teli || '';
+                document.getElementById('infoTanggalAyah').value = button.dataset.tala || '';
+                document.getElementById('infoTanggalIbu').value = button.dataset.tali || '';
+                document.getElementById('infoKerjaAyah').value = button.dataset.pa || '';
+                document.getElementById('infoKerjaIbu').value = button.dataset.pi || '';
+                document.getElementById('infoNoAyah').value = button.dataset.ha || '';
+                document.getElementById('infoNoIbu').value = button.dataset.hi || '';
+                document.getElementById('infoNikAyah').value = button.dataset.nia || '';
+                document.getElementById('infoNikIbu').value = button.dataset.nii || '';
+                document.getElementById('infoKkAyah').value = button.dataset.ka || '';
+                document.getElementById('infoKkIbu').value = button.dataset.ki || '';
+
+                const updateLink = (containerId, filename) => {
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+                    if (filename) {
+                        const url = '../../assets/uploads/' + encodeURIComponent(filename);
+                        container.innerHTML = `<a href="${url}" target="_blank">${filename}</a>`;
+                    } else {
+                        container.textContent = '-';
+                    }
+                };
+                updateLink('infoKtpAyah', button.dataset.kta);
+                updateLink('infoKtpIbu', button.dataset.kti);
+            });
+        }
     </script>
 </body>
 </html>

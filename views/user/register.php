@@ -156,8 +156,8 @@ if (session_status() == PHP_SESSION_NONE) {
       <?php endif; ?>
     <form action="../../controllers/user/user_register_handler.php" method="POST">
       <div class="form-group">
-        <label for="nama">Nama</label>
-        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap" required />
+        <label for="nama">Nama User</label>
+        <input type="text" name="nama_user" id="nama_user" placeholder="Masukkan Nama Lengkap" required />
       </div>
 
       <div class="form-group">
@@ -205,6 +205,7 @@ if (session_status() == PHP_SESSION_NONE) {
         }, 3000); // Wait 3 seconds before fading out
       }
 
+      // Hide/Show password toggle
       const passwordInput = document.querySelector('#password');
       const toggleButton = document.querySelector('.toggle-password');
 

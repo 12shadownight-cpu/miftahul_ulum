@@ -60,9 +60,9 @@ class ValidasiData {
      */
     public function getById($id_validasi) {
         try {
-            $sql = "SELECT * FROM {$this->table} WHERE id_validasi = :id LIMIT 1";
+            $sql = "SELECT * FROM {$this->table} WHERE id_validasi = :id_validasi";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':id', $id_validasi, PDO::PARAM_INT);
+            $stmt->bindValue(':id_validasi', $id_validasi, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

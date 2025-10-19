@@ -10,7 +10,7 @@ class PengurusController {
     // Mengontrol tambah pengurus (by admin)
     public function create($data) {
         if (
-            empty($data['nama']) ||
+            empty($data['nama_pengurus']) ||
             empty($data['username']) ||
             empty($data['password']) ||
             empty($data['email']) ||
@@ -58,7 +58,7 @@ class PengurusController {
 
         //Tambahkan
         $created = $this->pengurusModel->create(
-            $data['nama'],
+            $data['nama_pengurus'],
             $data['username'],
             $data['password'],
             $data['email'],
@@ -76,7 +76,7 @@ class PengurusController {
     //Mengontrol edit pengurus (by admin)
     public function update($id, $data) {
         if (
-            empty($data['nama']) ||
+            empty($data['nama_pengurus']) ||
             empty($data['username']) ||
             empty($data['email']) ||
             empty($data['no_hp']) ||
@@ -127,7 +127,7 @@ class PengurusController {
         //Ubahkan
         $updated = $this->pengurusModel->update(
             $id,
-            $data['nama'],
+            $data['nama_pengurus'],
             $data['username'],
             !empty($data['password']) ? $data['password'] : null,
             $data['email'],

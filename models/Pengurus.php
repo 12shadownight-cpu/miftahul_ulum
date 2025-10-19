@@ -22,7 +22,7 @@ class Pengurus {
             //SQL query
             $sql = "INSERT INTO {$this->table}
                 (nama_pengurus, username, password, email, no_hp, status)
-                VALUES (:nama, :username, :password, :email, :no_hp, :status)";
+                VALUES (:nama_pengurus, :username, :password, :email, :no_hp, :status)";
 
             //Prepare statement
             $stmt = $this->conn->prepare($sql);
@@ -30,7 +30,7 @@ class Pengurus {
             // Hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt->bindValue(':nama', $nama, PDO::PARAM_STR);
+            $stmt->bindValue(':nama_pengurus', $nama, PDO::PARAM_STR);
             $stmt->bindValue(':username', $username, PDO::PARAM_STR);
             $stmt->bindValue(':password', $hashed_password, PDO::PARAM_STR);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -132,7 +132,7 @@ class Pengurus {
             }
 
             $fields = [
-                'nama_pengurus = :nama',
+                'nama_pengurus = :nama_pengurus',
                 'username = :username',
                 'email = :email',
                 'no_hp = :no_hp',
@@ -148,7 +148,7 @@ class Pengurus {
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindValue(':id_pengurus', $id_pengurus, PDO::PARAM_INT);
-            $stmt->bindValue(':nama', $nama, PDO::PARAM_STR);
+            $stmt->bindValue(':nama_pengurus', $nama, PDO::PARAM_STR);
             $stmt->bindValue(':username', $username, PDO::PARAM_STR);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
             $stmt->bindValue(':no_hp', $no_hp, PDO::PARAM_STR);

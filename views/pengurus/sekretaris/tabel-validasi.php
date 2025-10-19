@@ -62,7 +62,11 @@ if ($status !== 'sekretaris') {
                                         <td><?= htmlspecialchars($row['hasil']) ?></td>
                                         <td><?= htmlspecialchars($row['keterangan']) ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal"
+                                            data-id="<?= htmlspecialchars($row['id_validasi'], ENT_QUOTES) ?>"
+                                            data-nama="<?= htmlspecialchars($row['nama_murid'], ENT_QUOTES) ?>"
+                                            data-hasil="<?= htmlspecialchars($row['hasil'], ENT_QUOTES) ?>"
+                                            data-keterangan="<?= htmlspecialchars($row['keterangan'], ENT_QUOTES) ?>">
                                                 <i class="bi bi-pencil-square me-1"></i>Ubah
                                             </button>
                                             <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_validasi'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -97,19 +101,23 @@ if ($status !== 'sekretaris') {
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <form action="../../../controllers/validasi/edit_validasi_handler.php" method="post" id="editForm">
+                            <input type="hidden" name="id_validasi" id="editId">
                             <!-- Nama Siswa -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Siswa</label>
-                                <select class="form-select" name="nama_murid" required>
+                                <select class="form-select" name="nama_murid" id="editNama" required>
                                     <option value="">~ Pilih ~</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="sekretaris">Sekretaris</option>
+                                    <?php foreach ($allValidasi as $row): ?>
+                                        <option value="<?= htmlspecialchars($row['id_murid']) ?>">
+                                            <?= htmlspecialchars($row['nama_murid']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <!-- Hasil Validasi -->
                             <div class="mb-3">
                                 <label class="form-label">Hasil Validasi</label>
-                                <select class="form-select" name="hasil" required>
+                                <select class="form-select" name="hasil" id="editHasil" required>
                                     <option value="">~ Pilih ~</option>
                                     <option value="diterima">Diterima</option>
                                     <option value="ditolak">Ditolak</option>
@@ -118,7 +126,7 @@ if ($status !== 'sekretaris') {
                             <!-- Keterangan -->
                             <div class="mb-3">
                                 <label class="form-label">Keterangan</label>
-                                <input type="text" class="form-control" name="keterangan" required/>
+                                <input type="text" class="form-control" name="keterangan" id="editKeterangan" required/>
                             </div>
                             <!-- Button -->
                             <div class="text-center">
@@ -164,6 +172,23 @@ if ($status !== 'sekretaris') {
         $(document).ready(function () {
             $('#example').DataTable();
         });
+
+        // when edit button clicked
+        const editModal = document.getElementById('editModal');
+        if (editModal) {
+            editModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                const id = button.getAttribute('data-id');
+                const nama = button.getAttribute('data-nama');
+                const hasil = button.getAttribute('data-hasil');
+                const keterangan = button.getAttribute('data-keterangan');
+
+                document.getElementById('editId').value = id;
+                document.getElementById('editNama').value = nama;
+                document.getElementById('editHasil').value = hasil;
+                document.getElementById('editKeterangan').value = keterangan;
+            });
+        }
 
         // when delete button clicked
         document.querySelectorAll('.deleteBtn').forEach(btn => {

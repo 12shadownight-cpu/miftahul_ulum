@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
+$pengurusId = $_SESSION['pengurus_id'] ?? '';
 $status = $_SESSION['pengurus_status'] ?? null;
 if ($status !== 'admin') {
     header('Location: ../../public/index.php');
@@ -58,17 +59,22 @@ if ($status !== 'admin') {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($allPengumuman as $row) : ?>
+                            <?php foreach ($getPengumuman as $row) : ?>
                                 <tr>
                                     <td><?= htmlspecialchars($row['nama_pengurus']) ?></td>
                                     <td><?= htmlspecialchars($row['judul']) ?></td>
                                     <td><?= htmlspecialchars($row['waktu_terbit']) ?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        <i class="bi bi-pencil-square me-1"></i>Ubah
+                                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal"
+                                        data-id="<?= htmlspecialchars($row['id_pengumuman'], ENT_QUOTES) ?>"
+                                        data-nama="<?= htmlspecialchars($row['nama_pengurus'], ENT_QUOTES) ?>"
+                                        data-judul="<?= htmlspecialchars($row['judul'], ENT_QUOTES) ?>"
+                                        data-deskripsi="<?= htmlspecialchars($row['deskripsi'], ENT_QUOTES) ?>"
+                                        data-file="<?= htmlspecialchars($row['file_pendukung'], ENT_QUOTES) ?>">
+                                            <i class="bi bi-pencil-square me-1"></i>Ubah
                                         </button>
                                         <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_pengumuman'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                        <i class="bi bi-trash me-1"></i>Hapus
+                                            <i class="bi bi-trash me-1"></i>Hapus
                                         </button>
                                     </td>
                                 </tr>
@@ -94,10 +100,11 @@ if ($status !== 'admin') {
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <form action="../../../controllers/pengumuman/add_pengumuman_handler.php" method="post" id="addForm" enctype="multipart/form-data">
+                            <input type="hidden" name="id_pengurus" value="<?= htmlspecialchars($pengurusId) ?>">
                             <!-- Nama Admin -->
                             <div class="mb-3">
-                                <label class="form-label">Nama Admin</label>
-                                <input type="text" class="form-control" name="nama_pengurus" value="" required/>
+                                <label class="form-label">Nama Penulis</label>
+                                <input type="text" class="form-control" name="nama_pengurus" value="<?= htmlspecialchars($pengurusName) ?>" readonly/>
                             </div>
                             <!-- Judul -->
                             <div class="mb-3">
@@ -112,7 +119,7 @@ if ($status !== 'admin') {
                             <!-- File -->
                             <div class="mb-3">
                                 <label class="form-label">File Pendukung</label>
-                                <input type="file" class="form-control" name="file_pendukung" accept=".pdf, .png, .jpeg, .jpg" required/>
+                                <input type="file" class="form-control" name="file_pendukung" accept=".pdf, .docx, .png, .jpeg, .jpg" required/>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-success">Simpan Data</button>
@@ -138,26 +145,27 @@ if ($status !== 'admin') {
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <form action="../../../controllers/pengumuman/edit_pengumuman_handler.php" method="post" id="editForm" enctype="multipart/form-data">
+                            <input type="hidden" name="id_pengumuman" id="editId">
                             <!-- Nama Admin -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Admin</label>
-                                <input type="text" class="form-control" name="nama_pengurus" value="" required/>
+                                <input type="text" id="editNama" class="form-control" name="nama_pengurus" value="" readonly/>
                             </div>
                             <!-- Judul -->
                             <div class="mb-3">
                                 <label class="form-label">Judul Pengumuman</label>
-                                <input type="text" class="form-control" name="judul" value="" required/>
+                                <input type="text" id="editJudul" class="form-control" name="judul" value="" required/>
                             </div>
                             <!-- Deskripsi -->
                             <div class="mb-3">
                                 <label class="form-label">Deskripsi Pengumuman</label>
-                                <textarea class="form-control" name="deskripsi"  style="height: 150px; resize: none; overflow-y: auto;" required></textarea>
+                                <textarea class="form-control" id="editDeskripsi" name="deskripsi"  style="height: 150px; resize: none; overflow-y: auto;" required></textarea>
                             </div>
                             <!-- File -->
                             <div class="mb-3">
                                 <label class="form-label">File Pendukung</label>
-                                <a href="http://" target="_blank" rel="noopener noreferrer"></a>
-                                <input type="file" class="form-control" name="file_pendukung" accept=".pdf, .png, .jpeg, .jpg" required/>
+                                <div class="small" id="editFile"></div>
+                                <input type="file" class="form-control" name="file_pendukung" accept=".pdf, .docx, .png, .jpeg, .jpg"/>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-warning">Ubah Data</button>
@@ -215,6 +223,35 @@ if ($status !== 'admin') {
             searching: false
             });
         });
+
+        // when edit button clicked
+        const editModal = document.getElementById('editModal');
+        if (editModal) {
+            editModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                const id = button.getAttribute('data-id');
+                const nama = button.getAttribute('data-nama');
+                const judul = button.getAttribute('data-judul');
+                const deskripsi = button.getAttribute('data-deskripsi');
+                const file = button.getAttribute('data-file');
+                const updateLink = (containerId, filename) => {
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+                    if (filename) {
+                        const url = '../../assets/uploads/' + encodeURIComponent(filename);
+                        container.innerHTML = `<a href="${url}" target="_blank">${filename}</a>`;
+                    } else {
+                        container.textContent = '-';
+                    }
+                };
+
+                document.getElementById('editId').value = id;
+                document.getElementById('editNama').value = nama;
+                document.getElementById('editJudul').value = judul;
+                document.getElementById('editDeskripsi').value = deskripsi;
+                updateLink('editFile', file);
+            });
+        }
 
         // when delete button clicked
         document.querySelectorAll('.deleteBtn').forEach(btn => {

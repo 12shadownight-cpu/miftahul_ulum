@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
+$pengurusId = $_SESSION['pengurus_id'] ?? '';
 $status = $_SESSION['pengurus_status'] ?? null;
 if ($status !== 'admin') {
     header('Location: ../../public/index.php');
@@ -62,12 +63,20 @@ if ($status !== 'admin') {
                                         <td><?= htmlspecialchars($row['no_hp']) ?></td>
                                         <td><?= htmlspecialchars($row['status']) ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit">
+                                            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal" title="Edit"
+                                            data-id="<?= htmlspecialchars($row['id_pengurus'], ENT_QUOTES) ?>"
+                                            data-nama="<?= htmlspecialchars($row['nama_pengurus'], ENT_QUOTES) ?>"
+                                            data-user="<?= htmlspecialchars($row['username'], ENT_QUOTES) ?>"
+                                            data-email="<?= htmlspecialchars($row['email'], ENT_QUOTES) ?>"
+                                            data-hp="<?= htmlspecialchars($row['no_hp'], ENT_QUOTES) ?>"
+                                            data-status="<?= htmlspecialchars($row['status'], ENT_QUOTES) ?>">
                                                 <i class="bi bi-pencil-square me-1"></i>Ubah
                                             </button>
-                                            <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_pengurus'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                                <i class="bi bi-trash me-1"></i>Hapus
-                                            </button>
+                                            <?php if ($row['id_pengurus'] != $pengurusId) : ?>
+                                                <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= htmlspecialchars($row['id_pengurus']) ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                    <i class="bi bi-trash me-1"></i>Hapus
+                                                </button>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -97,22 +106,22 @@ if ($status !== 'admin') {
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <form action="../../../controllers/pengurus/edit_pengurus_handler.php" method="post" id="editForm">
-                            <input type="hidden" name="id_pengurus">
+                            <input type="hidden" name="id_pengurus" id="editId">
                             <!-- Nama Lengkap -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" name="nama_pengurus" required />
+                                <input type="text" id="editNama" class="form-control" name="nama_pengurus" required />
                             </div>
                             <!-- Username -->
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
-                                <input type="text" class="form-control" name="username" required />
+                                <input type="text" id="editUser" class="form-control" name="username" required />
                             </div>
                             <!-- Password -->
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password" name="password" required />
+                                    <input type="password" class="form-control" id="password" name="password"/>
                                     <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
                                     <i class="bi bi-eye-slash" id="iconPassword"></i>
                                     </span>
@@ -121,17 +130,17 @@ if ($status !== 'admin') {
                             <!-- Email -->
                             <div class="mb-3">
                                 <label class="form-label">E-mail</label>
-                                <input type="email" class="form-control" name="email" placeholder="@example.mail.com" required />
+                                <input type="email" id="editEmail" class="form-control" name="email" placeholder="@example.mail.com" required />
                             </div>
                             <!-- No. Handphone -->
                             <div class="mb-3">
                                 <label class="form-label">No. Handphone</label>
-                                <input type="text" class="form-control" name="no_hp" required />
+                                <input type="text" id="editHp" class="form-control" name="no_hp" required />
                             </div>
                             <!-- Status -->
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select class="form-select" name="status" required>
+                                <select class="form-select" id="editStatus" name="status" required>
                                     <option value="">~ Pilih ~</option>
                                     <option value="admin">Admin</option>
                                     <option value="sekretaris">Sekretaris</option>
@@ -197,6 +206,27 @@ if ($status !== 'admin') {
             iconPassword.classList.toggle("bi-eye");
             iconPassword.classList.toggle("bi-eye-slash");
         });
+
+        // when edit button clicked
+        const editModal = document.getElementById('editModal');
+        if (editModal) {
+            editModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                const id = button.getAttribute('data-id');
+                const nama = button.getAttribute('data-nama');
+                const user = button.getAttribute('data-user');
+                const email = button.getAttribute('data-email');
+                const hp = button.getAttribute('data-hp');
+                const status = button.getAttribute('data-status');
+
+                document.getElementById('editId').value = id;
+                document.getElementById('editNama').value = nama;
+                document.getElementById('editUser').value = user;
+                document.getElementById('editEmail').value = email;
+                document.getElementById('editHp').value = hp;
+                document.getElementById('editStatus').value = status;
+            });
+        }
 
         // when delete button clicked
         document.querySelectorAll('.deleteBtn').forEach(btn => {

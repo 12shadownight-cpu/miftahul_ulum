@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $pengurusName = $_SESSION['pengurus_name'] ?? 'Guest';
+$pengurusId = $_SESSION['pengurus_id'] ?? '';
 $status = $_SESSION['pengurus_status'] ?? null;
 if ($status !== 'admin') {
     header('Location: ../../public/index.php');
@@ -62,7 +63,13 @@ if ($status !== 'admin') {
                                         <td><?= htmlspecialchars($row['judul']) ?></td>
                                         <td><?= htmlspecialchars($row['waktu_terbit']) ?></td>
                                         <td>
-                                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#infoModal"
+                                            data-id="<?= htmlspecialchars($row['id_pengumuman'], ENT_QUOTES) ?>"
+                                            data-nama="<?= htmlspecialchars($row['nama_pengurus'], ENT_QUOTES) ?>"
+                                            data-judul="<?= htmlspecialchars($row['judul'], ENT_QUOTES) ?>"
+                                            data-deskripsi="<?= htmlspecialchars($row['deskripsi'], ENT_QUOTES) ?>"
+                                            data-file="<?= htmlspecialchars($row['file_pendukung'], ENT_QUOTES) ?>"
+                                            data-waktu="<?= htmlspecialchars($row['waktu_terbit'], ENT_QUOTES) ?>">
                                                 <i class="bi bi-info-circle me-1"></i>info
                                             </button>
                                             <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_pengumuman'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -89,38 +96,37 @@ if ($status !== 'admin') {
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header bg-info text-white">
-                        <h5 class="modal-title" id="editModalLabel">
-                            Info Pengumuman
-                        </h5>
+                        <h5 class="modal-title" id="editModalLabel">Info Pengumuman</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <form id="editForm" enctype="multipart/form-data">
+                        <form id="infoForm" enctype="multipart/form-data">
+                            <input type="hidden" id="infoId">
                             <!-- Nama Admin -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Admin</label>
-                                <input type="text" class="form-control" name="nama_pengurus" readonly />
+                                <input type="text" id="infoNama" class="form-control" name="nama_pengurus" readonly />
                             </div>
                             <!-- Judul -->
                             <div class="mb-3">
                                 <label class="form-label">Judul Pengumuman</label>
-                                <input type="text" class="form-control" name="username" readonly />
+                                <input type="text" id="infoJudul" class="form-control" name="username" readonly />
                             </div>
                             <!-- Deskripsi -->
                             <div class="mb-3">
                                 <label class="form-label">Deskripsi Pengumuman</label>
-                                <textarea class="form-control" name="deskripsi" style="height: 150px; resize: none; overflow-y: auto;" readonly></textarea>
+                                <textarea class="form-control" id="infoDeskripsi" name="deskripsi" style="height: 150px; resize: none; overflow-y: auto;" readonly></textarea>
                             </div>
                             <!-- File -->
                             <div class="mb-3">
                                 <label class="form-label">File Pendukung</label>
-                                <input type="file" class="form-control" name="email" accept=".pdf, .png, .jpeg, .jpg" readonly />
+                                <div class="small" id="infoFile"></div>
                             </div>
                             <!-- Waktu Terbit -->
                             <div class="mb-3">
                                 <label class="form-label">Waktu Terbit</label>
-                                <input type="text" class="form-control" name="no_hp" readonly />
+                                <input type="text" id="infoWaktu" class="form-control" name="waktu_terbit" readonly />
                             </div>
                         </form>
                     </div>
@@ -162,6 +168,37 @@ if ($status !== 'admin') {
         $(document).ready(function () {
             $('#example').DataTable();
         });
+
+        // when info button clicked
+        const infoModal = document.getElementById('infoModal');
+        if (infoModal) {
+            infoModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                const id = button.getAttribute('data-id');
+                const nama = button.getAttribute('data-nama');
+                const judul = button.getAttribute('data-judul');
+                const deskripsi = button.getAttribute('data-deskripsi');
+                const waktu = button.getAttribute('data-waktu');
+                const file = button.getAttribute('data-file');
+                const updateLink = (containerId, filename) => {
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+                    if (filename) {
+                        const url = '../../assets/uploads/' + encodeURIComponent(filename);
+                        container.innerHTML = `<a href="${url}" target="_blank">${filename}</a>`;
+                    } else {
+                        container.textContent = '-';
+                    }
+                };
+
+                document.getElementById('infoId').value = id;
+                document.getElementById('infoNama').value = nama;
+                document.getElementById('infoJudul').value = judul;
+                document.getElementById('infoDeskripsi').value = deskripsi;
+                document.getElementById('infoWaktu').value = waktu;
+                updateLink('infoFile', file);
+            });
+        }
 
         // when delete button clicked
         document.querySelectorAll('.deleteBtn').forEach(btn => {

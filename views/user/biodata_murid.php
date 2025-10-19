@@ -43,72 +43,98 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Siswa</label>
-                                    <input type="text" class="form-control" name="nama_murid" readonly/>
+                                    <input type="text" class="form-control" name="nama_murid" value="<?= htmlspecialchars($getMurid['nama_murid']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Umur Siswa</label>
-                                    <input type="number" class="form-control" name="umur_murid" readonly/>
+                                    <input type="number" class="form-control" name="umur_murid" value="<?= htmlspecialchars($getMurid['umur_murid']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Jenis Kelamin</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="jenis_kelamin"/>
+                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" <?= ($getMurid['jenis_kelamin'] ?? '') === 'laki-laki' ? 'checked' : '' ?>/>
                                             <label class="form-check-label">Laki-Laki</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="jenis_kelamin"/>
+                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" <?= ($getMurid['jenis_kelamin'] ?? '') === 'perempuan' ? 'checked' : '' ?>/>
                                             <label class="form-check-label">Perempuan</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir</label>
-                                    <input type="text" class="form-control" name="tempat_lahir"readonly/>
+                                    <input type="text" class="form-control" name="tempat_lahir" value="<?= htmlspecialchars($getMurid['tempat_lahir']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" name="tanggal_lahir" readonly/>
+                                        <input type="date" class="form-control" name="tanggal_lahir" value="<?= htmlspecialchars($getMurid['tanggal_lahir']) ?>" readonly/>
                                         <span class="input-group-text"><i class="bi bi-calendar"></i></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Asal TK</label>
-                                    <input type="text" class="form-control" name="asal_tk" readonly/>
+                                    <input type="text" class="form-control" name="asal_tk" value="<?= htmlspecialchars($getMurid['asal_tk']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Alamat</label>
-                                    <input type="text" class="form-control" name="alamat" readonly/>
+                                    <input type="text" class="form-control" name="alamat" value="<?= htmlspecialchars($getMurid['alamat']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK</label>
-                                    <input type="text" class="form-control" name="nik" readonly/>
+                                    <input type="text" class="form-control" name="nik" value="<?= htmlspecialchars($getMurid['nik']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK</label>
-                                    <input type="text" class="form-control" name="no_kk" readonly/>
+                                    <input type="text" class="form-control" name="no_kk" value="<?= htmlspecialchars($getMurid['no_kk']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File Akta Kelahiran</label>
-                                    <input type="file" class="form-control" name="file_akta" accept=".png,.jpeg,.jpg" readonly/>
+                                    <?php if (!empty($getMurid['file_akta'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getMurid['file_akta']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getMurid['file_akta']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_akta" value="<?= htmlspecialchars($getMurid['file_akta']) ?>">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File Kartu Keluarga</label>
-                                    <input type="file" class="form-control" name="file_kk" accept=".png,.jpeg,.jpg" readonly/>
+                                    <?php if (!empty($getMurid['file_kk'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getMurid['file_kk']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getMurid['file_kk']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_kk" value="<?= htmlspecialchars($getMurid['file_kk']) ?>">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File Ijazah TK</label>
-                                    <input type="file" class="form-control" name="file_ijazah" accept=".png,.jpeg,.jpg" readonly/>
+                                    <?php if (!empty($getMurid['file_ijazah'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getMurid['file_ijazah']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getMurid['file_ijazah']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_ijazah" value="<?= htmlspecialchars($getMurid['file_ijazah']) ?>">
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#modalTambah">
-                                Tambah Data
-                                </button>
-                                <button type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#modalUbah">
-                                Ubah Data
-                                </button>
+                                <div class="text-center mt-4">
+                                    <?php if (!empty($getMurid) && !empty($getMurid['id_biodata'])): ?>
+                                        <button type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#modalUbah">
+                                            Ubah Data
+                                        </button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                                            Tambah Data
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -203,69 +229,93 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                     <form action="../../controllers/murid/edit_murid_handler.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-header">
                             <h5 class="modal-title">Ubah Data Siswa</h5>
-                            <input type="hidden" name="id_biodata" />
+                            <input type="hidden" name="id_biodata" value="<?= htmlspecialchars($getMurid['id_murid']) ?>"/>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Siswa</label>
-                                    <input type="text" name="nama_murid" class="form-control" required/>
+                                    <input type="text" name="nama_murid" class="form-control" value="<?= htmlspecialchars($getMurid['nama_murid']) ?>" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Umur Siswa</label>
-                                    <input type="number" name="umur_murid" class="form-control" required/>
+                                    <input type="number" name="umur_murid" value="<?= htmlspecialchars($getMurid['umur_murid']) ?>" class="form-control"  required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Jenis Kelamin</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" required/>
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" <?= ($getMurid['jenis_kelamin'] ?? '') === 'laki-laki' ? 'checked' : '' ?>/>
                                         <label class="form-check-label">Laki-Laki</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" required/>
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" <?= ($getMurid['jenis_kelamin'] ?? '') === 'perempuan' ? 'checked' : '' ?>/>
                                         <label class="form-check-label">Perempuan</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir</label>
-                                    <input type="text" name="tempat_lahir" class="form-control" required/>
+                                    <input type="text" name="tempat_lahir" value="<?= htmlspecialchars($getMurid['tempat_lahir']) ?>" class="form-control" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir</label>
                                     <div class="input-group">
-                                        <input type="text" id="dateEdit" name="tanggal_lahir" class="form-control" required/>
+                                        <input type="text" id="dateEdit" name="tanggal_lahir" value="<?= htmlspecialchars($getMurid['tanggal_lahir']) ?>" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Asal TK</label>
-                                    <input type="text" name="asal_tk" class="form-control" required/>
+                                    <input type="text" name="asal_tk" value="<?= htmlspecialchars($getMurid['asal_tk']) ?>" class="form-control" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Alamat</label>
-                                    <input type="text" name="alamat" class="form-control" required/>
+                                    <input type="text" name="alamat" value="<?= htmlspecialchars($getMurid['alamat']) ?>" class="form-control" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK</label>
-                                    <input type="text" name="nik" class="form-control" required/>
+                                    <input type="text" name="nik" value="<?= htmlspecialchars($getMurid['nik']) ?>" class="form-control" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK</label>
-                                    <input type="text" name="no_kk" class="form-control" required/>
+                                    <input type="text" name="no_kk" value="<?= htmlspecialchars($getMurid['no_kk']) ?>" class="form-control" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File Akta Kelahiran</label>
-                                    <input type="file" name="file_akta" class="form-control" accept=".png,.jpeg,.jpg" required/>
+                                    <?php if (!empty($getMurid['file_akta'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getMurid['file_akta']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getMurid['file_akta']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_akta" value="<?= htmlspecialchars($getMurid['file_akta']) ?>">
+                                    <?php endif; ?>
+                                    <input type="file" name="file_akta" class="form-control" accept=".png,.jpeg,.jpg"/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File Kartu Keluarga</label>
-                                    <input type="file" name="file_kk" class="form-control" accept=".png,.jpeg,.jpg" required/>
+                                    <?php if (!empty($getMurid['file_kk'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getMurid['file_kk']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getMurid['file_kk']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_kk" value="<?= htmlspecialchars($getMurid['file_kk']) ?>">
+                                    <?php endif; ?>
+                                    <input type="file" name="file_kk" class="form-control" accept=".png,.jpeg,.jpg"/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File Ijazah TK</label>
-                                    <input type="file" name="file_ijazah" class="form-control" accept=".png,.jpeg,.jpg" required/>
+                                    <?php if (!empty($getMurid['file_ijazah'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getMurid['file_ijazah']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getMurid['file_ijazah']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_ijazah" value="<?= htmlspecialchars($getMurid['file_ijazah']) ?>">
+                                    <?php endif; ?>
+                                    <input type="file" name="file_ijazah" class="form-control" accept=".png,.jpeg,.jpg"/>
                                 </div>
                             </div>
                         </div>

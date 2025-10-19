@@ -9,12 +9,12 @@ $controller = new PengurusController($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
-        'nama'     => $_POST['nama'] ?? '',
-        'username' => $_POST['username'] ?? '',
-        'password' => $_POST['password'] ?? '',
-        'email'    => $_POST['email'] ?? '',
-        'no_hp'    => $_POST['no_hp'] ?? '',
-        'status'   => $_POST['status'] ?? ''
+        'nama_pengurus' => $_POST['nama_pengurus'] ?? '',
+        'username'      => $_POST['username'] ?? '',
+        'password'      => $_POST['password'] ?? '',
+        'email'         => $_POST['email'] ?? '',
+        'no_hp'         => $_POST['no_hp'] ?? '',
+        'status'        => $_POST['status'] ?? ''
     ];
 
     $result = $controller->create($data);

@@ -51,9 +51,9 @@ if ($status !== 'sekretaris') {
                   <label class="form-label">Nama Murid</label>
                   <select class="form-select" name="nama_murid" required>
                     <option value="">~ Pilih ~</option>
-                    <?php foreach ($allMurid as $murid): ?>
-                        <option value="<?= htmlspecialchars($murid['id_murid']) ?>">
-                            <?= htmlspecialchars($murid['nama_murid']) ?>
+                    <?php foreach ($allMurid as $row): ?>
+                        <option value="<?= htmlspecialchars($row['id_murid']) ?>">
+                            <?= htmlspecialchars($row['nama_murid']) ?>
                         </option>
                     <?php endforeach; ?>
                   </select>

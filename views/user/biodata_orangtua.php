@@ -43,82 +43,99 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Ayah</label>
-                                    <input type="text" class="form-control" name="nama_ayah" readonly/>
+                                    <input type="text" class="form-control" name="nama_ayah" value="<?= htmlspecialchars($getOrangtua['nama_ayah']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Ibu</label>
-                                    <input type="text" class="form-control" name="nama_ibu" readonly/>
+                                    <input type="text" class="form-control" name="nama_ibu" value="<?= htmlspecialchars($getOrangtua['nama_ibu']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir Ayah</label>
-                                    <input type="text" class="form-control" name="tempat_lahir_ayah"readonly/>
+                                    <input type="text" class="form-control" name="tempat_lahir_ayah" value="<?= htmlspecialchars($getOrangtua['tempat_lahir_ayah']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir Ibu</label>
-                                    <input type="text" class="form-control" name="tempat_lahir_ibu"readonly/>
+                                    <input type="text" class="form-control" name="tempat_lahir_ibu" value="<?= htmlspecialchars($getOrangtua['tempat_lahir_ibu']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ayah</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" name="tanggal_lahir_ayah" readonly/>
+                                        <input type="date" class="form-control" name="tanggal_lahir_ayah" value="<?= htmlspecialchars($getOrangtua['tanggal_lahir_ayah']) ?>" readonly/>
                                         <span class="input-group-text"><i class="bi bi-calendar"></i></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ibu</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" name="tanggal_lahir_ibu" readonly/>
+                                        <input type="date" class="form-control" name="tanggal_lahir_ibu" value="<?= htmlspecialchars($getOrangtua['tanggal_lahir_ibu']) ?>" readonly/>
                                         <span class="input-group-text"><i class="bi bi-calendar"></i></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Pekerjaan Ayah</label>
-                                    <input type="text" class="form-control" name="pekerjaan_ayah" readonly/>
+                                    <input type="text" class="form-control" name="pekerjaan_ayah" value="<?= htmlspecialchars($getOrangtua['pekerjaan_ayah']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Pekerjaan Ibu</label>
-                                    <input type="text" class="form-control" name="pekerjaan_ibu" readonly/>
+                                    <input type="text" class="form-control" name="pekerjaan_ibu" value="<?= htmlspecialchars($getOrangtua['pekerjaan_ibu']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. Handphone Ayah</label>
-                                    <input type="tel" class="form-control" name="hp_ayah" readonly/>
+                                    <input type="tel" class="form-control" name="hp_ayah" value="<?= htmlspecialchars($getOrangtua['hp_ayah']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. Handphone Ibu</label>
-                                    <input type="tel" class="form-control" name="hp_ibu" readonly/>
+                                    <input type="tel" class="form-control" name="hp_ibu" value="<?= htmlspecialchars($getOrangtua['hp_ibu']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK Ayah</label>
-                                    <input type="text" class="form-control" name="nik_ayah" readonly/>
+                                    <input type="text" class="form-control" name="nik_ayah" value="<?= htmlspecialchars($getOrangtua['nik_ayah']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK Ibu</label>
-                                    <input type="text" class="form-control" name="nik_ibu" readonly/>
+                                    <input type="text" class="form-control" name="nik_ibu" value="<?= htmlspecialchars($getOrangtua['nik_ibu']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK Ayah</label>
-                                    <input type="text" class="form-control" name="kk_ayah" readonly/>
+                                    <input type="text" class="form-control" name="kk_ayah" value="<?= htmlspecialchars($getOrangtua['kk_ayah']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK Ibu</label>
-                                    <input type="text" class="form-control" name="kk_ibu" readonly/>
+                                    <input type="text" class="form-control" name="kk_ibu" value="<?= htmlspecialchars($getOrangtua['kk_ibu']) ?>" readonly/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File KTP Ayah</label>
-                                    <input type="file" class="form-control" name="file_ktp_ayah" accept=".png,.jpeg,.jpg" readonly/>
+                                    <?php if (!empty($getOrangtua['file_ktp_ayah'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getOrangtua['file_ktp_ayah']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getOrangtua['file_ktp_ayah']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_ktp_ayah" value="<?= htmlspecialchars($getOrangtua['file_ktp_ayah']) ?>">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File KTP Ibu</label>
-                                    <input type="file" class="form-control" name="file_ktp_ibu" accept=".png,.jpeg,.jpg" readonly/>
+                                    <?php if (!empty($getOrangtua['file_ktp_ibu'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getOrangtua['file_ktp_ibu']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getOrangtua['file_ktp_ibu']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_ktp_ibu" value="<?= htmlspecialchars($getOrangtua['file_ktp_ibu']) ?>">
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#modalTambah">
-                                    Tambah Data
-                                </button>
-                                <button type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#modalUbah">
-                                    Ubah Data
-                                </button>
+                                <?php if (!empty($getOrangtua) && !empty($getorangtua['id_biodata'])): ?>
+                                    <button type="button" class="btn btn-warning px-4" data-bs-toggle="modal" data-bs-target="#modalUbah">
+                                        Ubah Data
+                                    </button>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                                        Tambah Data
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </form>
                     </div>
@@ -222,78 +239,92 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                     <form action="../../controllers/orangtua/edit_orangtua_handler.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-header">
                             <h5 class="modal-title">Ubah Data Siswa</h5>
-                            <input type="hidden" name="id_biodata" />
+                            <input type="hidden" name="id_biodata" value="<?= htmlspecialchars($getOrangtua['id_orangtua']) ?>"/>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Ayah</label>
-                                    <input type="text" name="nama_ayah" class="form-control" required>
+                                    <input type="text" name="nama_ayah" value="<?= htmlspecialchars($getOrangtua['nama_ayah']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Nama Ibu</label>
-                                    <input type="text" name="nama_ibu" class="form-control" required>
+                                    <input type="text" name="nama_ibu" value="<?= htmlspecialchars($getOrangtua['nama_ibu']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir Ayah</label>
-                                    <input type="text" name="tempat_lahir_ayah" class="form-control" required>
+                                    <input type="text" name="tempat_lahir_ayah" value="<?= htmlspecialchars($getOrangtua['tempat_lahir_ayah']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tempat Lahir Ibu</label>
-                                    <input type="text" name="tempat_lahir_ibu" class="form-control" required>
+                                    <input type="text" name="tempat_lahir_ibu" value="<?= htmlspecialchars($getOrangtua['tempat_lahir_ibu']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ayah</label>
                                     <div class="input-group">
-                                        <input type="text" name="tanggal_lahir_ayah" class="form-control dateInput" required>
+                                        <input type="text" name="tanggal_lahir_ayah" value="<?= htmlspecialchars($getOrangtua['tanggal_lahir_ayah']) ?>" class="form-control dateInput" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ibu</label>
                                     <div class="input-group">
-                                        <input type="text" name="tanggal_lahir_ibu" class="form-control dateInput" required>
+                                        <input type="text" name="tanggal_lahir_ibu" value="<?= htmlspecialchars($getOrangtua['tanggal_lahir_ibu']) ?>" class="form-control dateInput" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Pekerjaan Ayah</label>
-                                    <input type="text" name="pekerjaan_ayah" class="form-control" required>
+                                    <input type="text" name="pekerjaan_ayah" value="<?= htmlspecialchars($getOrangtua['pekerjaan_ayah']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Pekerjaan Ibu</label>
-                                    <input type="text" name="pekerjaan_ibu" class="form-control" required>
+                                    <input type="text" name="pekerjaan_ibu" value="<?= htmlspecialchars($getOrangtua['pekerjaan_ibu']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. Handphone Ayah</label>
-                                    <input type="tel" name="hp_ayah" class="form-control" required>
+                                    <input type="tel" name="hp_ayah" value="<?= htmlspecialchars($getOrangtua['hp_ayah']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. Handphone Ibu</label>
-                                    <input type="tel" name="hp_ibu" class="form-control" required>
+                                    <input type="tel" name="hp_ibu" value="<?= htmlspecialchars($getOrangtua['hp_ibu']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK Ayah</label>
-                                    <input type="text" name="nik_ayah" class="form-control" required>
+                                    <input type="text" name="nik_ayah" value="<?= htmlspecialchars($getOrangtua['nik_ayah']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">NIK Ibu</label>
-                                    <input type="text" name="nik_ibu" class="form-control" required>
+                                    <input type="text" name="nik_ibu" value="<?= htmlspecialchars($getOrangtua['nik_ibu']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK Ayah</label>
-                                    <input type="text" name="kk_ayah" class="form-control" required>
+                                    <input type="text" name="kk_ayah" value="<?= htmlspecialchars($getOrangtua['kk_ayah']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">No. KK Ibu</label>
-                                    <input type="text" name="kk_ibu" class="form-control" required>
+                                    <input type="text" name="kk_ibu" value="<?= htmlspecialchars($getOrangtua['kk_ibu']) ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File KTP Ayah</label>
-                                    <input type="file" name="file_ktp_ayah" class="form-control" accept=".png,.jpeg,.jpg" required>
+                                    <?php if (!empty($getOrangtua['file_ktp_ayah'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getOrangtua['file_ktp_ayah']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getOrangtua['file_ktp_ayah']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_ktp_ayah" value="<?= htmlspecialchars($getOrangtua['file_ktp_ayah']) ?>">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">File KTP Ibu</label>
-                                    <input type="file" name="file_ktp_ibu" class="form-control" accept=".png,.jpeg,.jpg" required>
+                                    <?php if (!empty($getOrangtua['file_ktp_ibu'])): ?>
+                                        <div class="small mb-2">
+                                            <a href="../../assets/uploads/<?= rawurlencode($getOrangtua['file_ktp_ibu']) ?>" target="_blank">
+                                                <?= htmlspecialchars($getOrangtua['file_ktp_ibu']) ?>
+                                            </a>
+                                        </div>
+                                        <input type="hidden" name="existing_file_ktp_ibu" value="<?= htmlspecialchars($getOrangtua['file_ktp_ibu']) ?>">
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

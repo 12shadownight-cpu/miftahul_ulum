@@ -80,7 +80,7 @@ class Pengumuman {
 
     /**
      * Get announcement by ID
-     * @param int $id_pengumuman - Announcement ID
+     * @param int $id_pengurus - Staff ID
      * @param bool $withPengurus - Whether to join with pengurus table
      * @return array|null - Announcement data or null if not found
      */
@@ -91,11 +91,11 @@ class Pengumuman {
                 $sql = "SELECT p.*, d.nama_pengurus
                         FROM {$this->table} p
                         JOIN data_pengurus d ON p.id_pengurus = d.id_pengurus
-                        WHERE p.id_pengumuman = :id_pengumuman
+                        WHERE p.id_pengurus = :id_pengurus
                         LIMIT 1";
             } else {
                 $sql = "SELECT * FROM {$this->table} 
-                        WHERE id_pengumuman = :id_pengumuman
+                        WHERE id_pengurus = :id_pengurus
                         LIMIT 1";
             }
 
