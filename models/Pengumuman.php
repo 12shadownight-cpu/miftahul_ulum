@@ -84,7 +84,7 @@ class Pengumuman {
      * @param bool $withPengurus - Whether to join with pengurus table
      * @return array|null - Announcement data or null if not found
      */
-    public function getById($id_pengumuman, $withPengurus = false) {
+    public function getById($id_pengurus, $withPengurus = false) {
         try {
             // Query based on whether join is needed
             if ($withPengurus) {
@@ -100,7 +100,7 @@ class Pengumuman {
             }
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':id_pengumuman', $id_pengumuman, PDO::PARAM_INT);
+            $stmt->bindValue(':id_pengumuman', $id_pengurus, PDO::PARAM_INT);
             $stmt->execute();
 
             // Return single row or null

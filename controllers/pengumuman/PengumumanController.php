@@ -36,7 +36,7 @@ class PengumumanController {
 
         // Validate file type
         if (!in_array($ext, $allowedTypes)) {
-        return ['success' => false, 'message' => 'File tipe tidak diizinkan!'];
+            return ['success' => false, 'message' => 'File tipe tidak diizinkan!'];
         }
 
         // Validate file size (max 2MB)
@@ -48,7 +48,14 @@ class PengumumanController {
         $safeName = preg_replace('/[^a-zA-Z0-9\._-]/', '_', $originalName);
         // Add unique ID to avoid overwriting
         $fileNameToStore = uniqid('file_', true) . '_' . $safeName;
-        $targetPath = __DIR__ . '/../../assets/uploads/' . $fileNameToStore;
+        $uploadDir = __DIR__ . '/../../assets/uploads/';
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0775, true) && !is_dir($uploadDir)) {
+                return ['success' => false, 'message' => 'Folder penyimpanan belum tersedia dan gagal dibuat!'];
+            }
+        }
+
+        $targetPath = $uploadDir . $fileNameToStore;
 
         // Move uploaded file to uploads folder
         if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
@@ -109,7 +116,14 @@ class PengumumanController {
 
             $safeName = preg_replace('/[^a-zA-Z0-9\._-]/', '_', $originalName);
             $fileNameToStore = uniqid('file_', true) . '_' . $safeName;
-            $targetPath = __DIR__ . '/../../assets/uploads/' . $fileNameToStore;
+            $uploadDir = __DIR__ . '/../../assets/uploads/';
+            if (!is_dir($uploadDir)) {
+                if (!mkdir($uploadDir, 0775, true) && !is_dir($uploadDir)) {
+                    return ['success' => false, 'message' => 'Folder penyimpanan belum tersedia dan gagal dibuat!'];
+                }
+            }
+
+            $targetPath = $uploadDir . $fileNameToStore;
 
             if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
                 return ['success' => false, 'message' => 'Gagal menyimpan file baru!'];

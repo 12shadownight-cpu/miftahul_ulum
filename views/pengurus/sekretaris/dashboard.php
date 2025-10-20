@@ -73,8 +73,8 @@ $allVoid = ($totals['laki-laki'] == 0 && $totals['perempuan'] == 0);
                             <i class="fa-solid fa-flag"></i>
                         </div>
                         <div class="content">
-                            <h4>Bookmarks</h4>
-                            <p>410</p>
+                            <h4>Jumlah calon siswa terdaftar</h4>
+                            <p><?= number_format($counts['id_murid']) ?> orang</p>
                         </div>
                     </div>
                 </div>
@@ -85,8 +85,8 @@ $allVoid = ($totals['laki-laki'] == 0 && $totals['perempuan'] == 0);
                             <i class="fa-solid fa-upload"></i>
                         </div>
                         <div class="content">
-                            <h4>Uploads</h4>
-                            <p>13,648</p>
+                            <h4>Jumlah hasil verifikasi terdaftar</h4>
+                            <p><?= number_format($counts['hasil']) ?> daftar</p>
                         </div>
                     </div>
                 </div>

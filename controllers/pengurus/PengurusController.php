@@ -193,7 +193,11 @@ class PengurusController {
 
     // Mengontrol logout pengurus
     public function logout() {
-        session_destroy();
+        if(session_status() === PHP_SESSION_ACTIVE) {
+            $_SESSION = [];
+            session_unset();
+            session_regenerate_id(true);
+        }
         return ['success' => true, 'message' => 'Logout berhasil!'];
     }
 

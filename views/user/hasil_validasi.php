@@ -4,6 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $userName = $_SESSION['user_name'] ?? 'Guest';
+
+// Normalise hasil validasi data to an indexed list so the table renders consistently
+$validasiRows = [];
+if (!empty($getValidasi)) {
+    if (is_array($getValidasi)) {
+        $isAssociative = array_keys($getValidasi) !== range(0, count($getValidasi) - 1);
+        $validasiRows = $isAssociative ? [$getValidasi] : $getValidasi;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -51,19 +60,31 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($getValidasi as $row) : ?>
+                            <?php if (!empty($getValidasi)) : ?>
+                                <?php foreach ($getValidasi as $row) : ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($row['hasil'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['keterangan'] ?? '-') ?></td>
+                                        <?php if (isset($row['hasil']) && strtolower($row['hasil']) === "diterima") : ?>
+                                            <td>
+                                                <a href="./bukti_pendaftaran.php" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary me-1">
+                                                    <i class="bi bi-printer me-1"></i>Cetak
+                                                </a>
+                                            </td>
+                                        <?php else : ?>
+                                            <td>
+                                                <a class="btn btn-sm btn-secondary disabled me-1">
+                                                    <i class="bi bi-printer me-1"></i>Cetak
+                                                </a>
+                                            </td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else : ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($getValidasi['hasil']) ?></td>
-                                    <td><?= htmlspecialchars($getValidasi['keterangan']) ?></td>
-                                    <?php if ($getValidasi['hasil'] === "diterima") : ?>
-                                        <td>
-                                            <a href="./bukti_pendaftaran.php" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary me-1">
-                                                <i class="bi bi-printer me-1"></i>Cetak
-                                            </a>
-                                        </td>
-                                    <?php endif ?>
+                                    <td colspan="7" class="text-center text-muted">Tidak ada data</td>
                                 </tr>
-                            <?php endforeach ?>
+                            <?php endif; ?>
                             <!-- Add more rows if needed -->
                         </tbody>
                     </table>

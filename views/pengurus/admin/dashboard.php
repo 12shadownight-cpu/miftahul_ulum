@@ -9,6 +9,21 @@ if ($status !== 'admin') {
     header('Location: ../../public/index.php');
     exit;
 }
+
+// Ensure the dashboard metrics are always available
+$counts = is_array($counts)
+    ? array_merge([
+        'users' => 0,
+        'admins' => 0,
+        'sekretaris' => 0,
+        'pengumuman' => 0,
+    ], $counts)
+    : [
+        'users' => 0,
+        'admins' => 0,
+        'sekretaris' => 0,
+        'pengumuman' => 0,
+    ];
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +62,7 @@ if ($status !== 'admin') {
                     <div class="icon bg-green"><i class="fa-solid fa-user"></i></div>
                     <div class="content">
                         <h4>Jumlah User</h4>
-                        <p>1,410 Orang</p>
+                        <p><?= number_format($counts['users']) ?> Orang</p>
                     </div>
                 </div>
 
@@ -55,7 +70,7 @@ if ($status !== 'admin') {
                     <div class="icon bg-red"><i class="fa-solid fa-user-tie"></i></div>
                     <div class="content">
                         <h4>Jumlah Sekretaris</h4>
-                        <p>410 Orang</p>
+                        <p><?= number_format($counts['sekretaris']) ?> Orang</p>
                     </div>
                 </div>
 
@@ -63,7 +78,7 @@ if ($status !== 'admin') {
                     <div class="icon bg-blue"><i class="fa-solid fa-user-tie"></i></div>
                     <div class="content">
                         <h4>Jumlah Admin</h4>
-                        <p>13,648 Orang</p>
+                        <p><?= number_format($counts['admins']) ?> Orang</p>
                     </div>
                 </div>
 
@@ -71,7 +86,7 @@ if ($status !== 'admin') {
                     <div class="icon bg-yellow"><i class="fa-solid fa-comment"></i></div>
                     <div class="content">
                         <h4>Jumlah Pengumuman</h4>
-                        <p>93,139 Postingan</p>
+                        <p><?= number_format($counts['pengumuman']) ?> Postingan</p>
                     </div>
                 </div>
             </div>

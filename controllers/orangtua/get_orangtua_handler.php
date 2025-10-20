@@ -8,7 +8,11 @@ $db = (new Database())->connect();
 $controller = new OrangtuaController($db);
 
 // Ambil semua data murid
-$id_user = $_SESSION['id_user'];
+$id_user = $_SESSION['user_id'] ?? null;
+if ($id_user === null) {
+    header('Location: ../../views/user/login.php');
+    exit;
+}
 $getOrangtua = $controller->getByUserId($id_user);
 
 // Tampilkan pada view
