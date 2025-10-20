@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect based on outcome
     $redirect = $result['success']
-        ? '../../views/pengurus/admin/data-pengumuman.php'
+        ? './fetch_pengumuman_handler.php'
         : '../../views/pengurus/admin/input-pengumuman.php';
 
     header('Location: ' . $redirect);

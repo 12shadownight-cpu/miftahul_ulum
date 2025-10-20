@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $_SESSION['message'] = $result['message'];
     if ($result['success']) {
-        header('Location: ../../views/pengurus/sekretaris/tabel-validasi.php');
+        header('Location: ./fetch_validasi_handler.php');
     } else {
-        header('Location: ../../views/pengurus/sekretaris/tabel-validasi.php');
+        header('Location: ./fetch_validasi_handler.php');
     }
     exit;
 } else {

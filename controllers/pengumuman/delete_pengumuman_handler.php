@@ -8,8 +8,8 @@ require_once __DIR__ . '/PengumumanController.php';
 $db = (new Database())->connect();
 $controller = new PengumumanController($db);
 
-if (isset($_GET['id']) && ctype_digit($_GET['id']) && intval($_GET['id']) > 0) {
-    $id = intval($_GET['id']);
+if (isset($_POST['id_pengumuman']) && ctype_digit($_POST['id_pengumuman']) && intval($_POST['id_pengumuman']) > 0) {
+    $id = intval($_POST['id_pengumuman']);
 
     // Delete record using controller
     $result = $controller->delete($id);
@@ -24,5 +24,5 @@ if (isset($_GET['id']) && ctype_digit($_GET['id']) && intval($_GET['id']) > 0) {
 }
 
 // Redirect back to the data list
-header('Location: ../../views/pengurus/admin/data-pengumuman.php');
+header('Location: ./fetch_pengumuman_handler.php');
 exit;

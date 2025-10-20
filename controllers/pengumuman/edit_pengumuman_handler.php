@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['message_type'] = $result['success'] ? 'success' : 'error';
 
     // Always redirect back to the data list
-    header('Location: ../../views/pengurus/admin/data-pengumuman.php');
+    header('Location: ./fetch_pengumuman_handler.php');
     exit;
 }
 

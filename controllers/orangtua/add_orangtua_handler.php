@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $controller->create($data);
 
     $_SESSION['message'] = $result['message'];
-    header('Location: ../../views/user/biodata_orangtua.php');
+    header('Location: ./get_orangtua_handler.php');
     exit;
 } else {
     header('Location: ../../views/user/biodata_orangtua.php');

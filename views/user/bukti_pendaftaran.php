@@ -1,3 +1,10 @@
+<?php
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$userName = $_SESSION['user_name'] ?? 'Guest';
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -135,7 +142,7 @@
 <body>
 
   <div class="page">
-    <img src="./assets/img/logo.png" alt="Logo" class="logo">
+    <img src="../../assets/images/logo.svg" alt="Logo" class="logo">
 
     <div class="header">
       <div class="school-name">YAYASAN MIFTAHUL’ ULUM AL-MUNAWWAROH</div>
@@ -156,13 +163,13 @@
 
     <div class="content">
       <table>
-        <tr><td width="40%">No. Pendaftaran</td><td>: &lt;&lt;id_murid&gt;&gt;</td></tr>
-        <tr><td>Nama Calon Siswa</td><td>: &lt;&lt;nama_murid&gt;&gt;</td></tr>
-        <tr><td>Umur</td><td>: &lt;&lt;umur&gt;&gt;</td></tr>
-        <tr><td>Jenis Kelamin</td><td>: &lt;&lt;jenis_kelamin&gt;&gt;</td></tr>
-        <tr><td>Asal TK</td><td>: &lt;&lt;asal_tk&gt;&gt;</td></tr>
-        <tr><td>Nama Ayah</td><td>: &lt;&lt;nama_ayah&gt;&gt;</td></tr>
-        <tr><td>Nama Ibu</td><td>: &lt;&lt;nama_ibu&gt;&gt;</td></tr>
+        <tr><td width="40%">No. Pendaftaran</td><td>: <?= htmlspecialchars($getValidasi['id_murid']) ?></td></tr>
+        <tr><td>Nama Calon Siswa</td><td>: <?= htmlspecialchars($getValidasi['nama_murid']) ?></td></tr>
+        <tr><td>Umur</td><td>: <?= htmlspecialchars($getValidasi['umur_murid']) ?> Tahun</td></tr>
+        <tr><td>Jenis Kelamin</td><td>: <?= htmlspecialchars($getValidasi['jenis_kelamin']) ?></td></tr>
+        <tr><td>Asal TK</td><td>: <?= htmlspecialchars($getValidasi['asal_tk']) ?></td></tr>
+        <tr><td>Nama Ayah</td><td>: <?= htmlspecialchars($getValidasi['nama_ayah']) ?></td></tr>
+        <tr><td>Nama Ibu</td><td>: <?= htmlspecialchars($getValidasi['nama_ibu']) ?></td></tr>
         <tr><td>Status Verifikasi</td><td>: Diterima</td></tr>
       </table>
 
@@ -174,7 +181,7 @@
 
     <div class="signature">
       <p>Batam, 13 Oktober 2024<br>Ketua Panitia PPDB 2024</p>
-      <img src="./assets/img/Pak Inten Signature.png" alt="Tanda Tangan">
+      <img src="../../assets/images/Pak Inten Signature.svg" alt="Tanda Tangan">
       <strong>Inten Hasannudin, S.Pd.I</strong>
     </div>
   </div>

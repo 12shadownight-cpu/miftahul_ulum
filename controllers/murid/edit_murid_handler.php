@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $_SESSION['message'] = $result['message'];
     if ($result['success']) {
-        header('Location: ../../views/user/biodata_murid.php');
+        header('Location: ./get_biodata_handler.php');
     } else {
         header('Location: ../../views/user/biodata_murid.php');
     }

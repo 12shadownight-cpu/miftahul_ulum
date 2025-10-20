@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result['success']) {
         // Redirect back to admin dashboard with success
         $_SESSION['message'] = $result['message'];
-        header('Location: ../../views/pengurus/admin/data-pengurus.php');
+        header('Location: ./fetch_pengurus_handler.php');
         exit;
     } else {
         // Redirect back to registration form with error

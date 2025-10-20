@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Redirect back to data pengurus
     $_SESSION['message'] = $result['message'];
-    header('Location: ../../views/pengurus/admin/data-pengurus.php');
+    header('Location: ./fetch_pengurus_handler.php');
     exit;
 } else {
     header('Location: ../../views/pengurus/admin/data-pengurus.php');

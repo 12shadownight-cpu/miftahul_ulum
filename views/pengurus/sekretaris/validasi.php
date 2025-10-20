@@ -46,16 +46,23 @@ if ($status !== 'sekretaris') {
           <div class="card">
             <div class="card-body">
               <form action="../../../controllers/validasi/add_validasi_handler.php" method="post">
+                <input type="hidden" name="id_biodata" id="inputBiodata">
+                <input type="hidden" name="id_user" id="inputUser">
+                <input type="hidden" name="id_orangtua" id="inputOrangtua">
                 <!-- Nama Siswa -->
                 <div class="mb-3">
                   <label class="form-label">Nama Murid</label>
-                  <select class="form-select" name="nama_murid" required>
+                  <select class="form-select" name="nama_murid" id="muridSelect" required>
                     <option value="">~ Pilih ~</option>
-                    <?php foreach ($allMurid as $row): ?>
-                        <option value="<?= htmlspecialchars($row['id_murid']) ?>">
-                            <?= htmlspecialchars($row['nama_murid']) ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <?php if(!empty($allMurid)) : ?>
+                      <?php foreach ($allMurid as $row): ?>
+                          <option value="<?= htmlspecialchars($row['id_biodata']) ?>">
+                              <?= htmlspecialchars($row['nama_murid']) ?>
+                          </option>
+                      <?php endforeach; ?>
+                    <?php else : ?>
+                      <option value="">Belum ada data</option>
+                    <?php endif ?>
                   </select>
                 </div>
                 <!-- Hasil Validasi -->
@@ -89,5 +96,15 @@ if ($status !== 'sekretaris') {
     </div>
 
     <?php include '../../partials/footer/pengurus_footer.php'; ?>
+
+    <script>
+      //Add value to hidden input
+      document.getElementById('muridSelect').addEventListener('change', function () {
+          const opt = this.selectedOptions[0];
+          document.getElementById('inputBiodata').value = opt.value || '';
+          document.getElementById('inputUser').value = opt.dataset.user || '';
+          document.getElementById('inputOrangtua').value = opt.dataset.orangtua || '';
+      });
+    </script>
 </body>
 </html>

@@ -78,8 +78,8 @@ class ValidasiController {
         return $this->validasiModel->getAllWithRelations();
     }
 
-    public function getByIdWithRelations($id) {
-        return $this->validasiModel->getByIdWithRelations($id);
+    public function getByIdWithRelations($id_user) {
+        return $this->validasiModel->getByIdWithRelations($id_user);
     }
 
     // Menghitung total hasil

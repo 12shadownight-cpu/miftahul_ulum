@@ -83,12 +83,12 @@ class ValidasiData {
             $sql = "UPDATE {$this->table}
                     SET hasil = :hasil,
                         keterangan = :keterangan
-                    WHERE id_validasi = :id";
+                    WHERE id_validasi = :id_validasi";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':hasil', $hasil, PDO::PARAM_STR);
             $stmt->bindValue(':keterangan', $keterangan, PDO::PARAM_STR);
-            $stmt->bindValue(':id', $id_validasi, PDO::PARAM_INT);
+            $stmt->bindValue(':id_validasi', $id_validasi, PDO::PARAM_INT);
 
             return $stmt->execute();
         } catch (PDOException $e) {
@@ -141,24 +141,24 @@ class ValidasiData {
 
     /**
      * Get single validation record with related user, student, and parent data
-     * @param int $id_validasi
+     * @param int $id_user
      * @return array|null
      */
-    public function getByIdWithRelations($id_validasi) {
+    public function getByIdWithRelations($id_user) {
         try {
             $sql = "SELECT v.*, 
-                           u.nama_user AS nama_user, 
-                           b.nama_murid AS nama_murid, 
-                           o.nama_ayah
+                           u.*, 
+                           b.*, 
+                           o.nama_ayah AS nama_ayah,
+                           o.nama_ibu AS nama_ibu
                     FROM {$this->table} v
                     JOIN data_user u ON v.id_user = u.id_user
                     JOIN biodata_murid b ON v.id_biodata = b.id_biodata
                     JOIN biodata_orangtua o ON v.id_orangtua = o.id_orangtua
-                    WHERE v.id_validasi = :id
-                    LIMIT 1";
+                    WHERE u.id_user = :id_user";
             
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':id', $id_validasi, PDO::PARAM_INT);
+            $stmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -183,7 +183,7 @@ class ValidasiData {
             return $result ? (int) $result['total'] : 0;
         } catch (PDOException $e) {
             error_log("ValidasiData countByHasil error: " . $e->getMessage());
-            return false;
+            return 0;
         }
     }
 }

@@ -51,24 +51,19 @@ $userName = $_SESSION['user_name'] ?? 'Guest';
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Diterima</td>
-                                <td>Tidak ada masalah</td>
-                                <td>
-                                <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary me-1">
-                                    <i class="bi bi-printer me-1"></i>Cetak
-                                </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ditolak</td>
-                                <td>Nomor KTP tidak terdafar</td>
-                                <td>
-                                <a class="btn btn-sm btn-secondary me-1 disabled">
-                                    <i class="bi bi-printer me-1"></i>Cetak
-                                </a>
-                                </td>
-                            </tr>
+                            <?php foreach ($getValidasi as $row) : ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($getValidasi['hasil']) ?></td>
+                                    <td><?= htmlspecialchars($getValidasi['keterangan']) ?></td>
+                                    <?php if ($getValidasi['hasil'] === "diterima") : ?>
+                                        <td>
+                                            <a href="./bukti_pendaftaran.php" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary me-1">
+                                                <i class="bi bi-printer me-1"></i>Cetak
+                                            </a>
+                                        </td>
+                                    <?php endif ?>
+                                </tr>
+                            <?php endforeach ?>
                             <!-- Add more rows if needed -->
                         </tbody>
                     </table>
