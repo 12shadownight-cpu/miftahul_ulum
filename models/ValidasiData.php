@@ -120,9 +120,9 @@ class ValidasiData {
      */
     public function getAllWithRelations() {
         try {
-            $sql = "SELECT v.*, 
-                           u.nama_user AS nama_user, 
-                           b.nama_murid AS nama_murid, 
+            $sql = "SELECT v.*,
+                           u.nama_user AS nama_user,
+                           b.nama_murid AS nama_murid,
                            o.nama_ayah
                     FROM {$this->table} v
                     JOIN data_user u ON v.id_user = u.id_user
@@ -146,9 +146,9 @@ class ValidasiData {
      */
     public function getByIdWithRelations($id_user) {
         try {
-            $sql = "SELECT v.*, 
-                           u.*, 
-                           b.*, 
+            $sql = "SELECT v.*,
+                           u.*,
+                           b.*,
                            o.nama_ayah AS nama_ayah,
                            o.nama_ibu AS nama_ibu
                     FROM {$this->table} v
@@ -163,6 +163,34 @@ class ValidasiData {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("ValidasiData getByIdWithRelations error: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Get validation record by validation ID with related data
+     * @param int $id_validasi
+     * @return array|null
+     */
+    public function getByValidasiIdWithRelations($id_validasi) {
+        try {
+            $sql = "SELECT v.*,
+                           u.*,
+                           b.*,
+                           o.nama_ayah AS nama_ayah,
+                           o.nama_ibu AS nama_ibu
+                    FROM {$this->table} v
+                    JOIN data_user u ON v.id_user = u.id_user
+                    JOIN biodata_murid b ON v.id_biodata = b.id_biodata
+                    JOIN biodata_orangtua o ON v.id_orangtua = o.id_orangtua
+                    WHERE v.id_validasi = :id_validasi";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':id_validasi', $id_validasi, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("ValidasiData getByValidasiIdWithRelations error: " . $e->getMessage());
             return null;
         }
     }

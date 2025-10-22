@@ -20,8 +20,8 @@ class MuridController {
 
         $created = $this->muridModel->create(
             $data['id_user'],
-            $data['nama'],
-            $data['umur'],
+            $data['nama_murid'],
+            $data['umur_murid'],
             $data['jenis_kelamin'],
             $data['tempat_lahir'],
             $data['tanggal_lahir'],
@@ -54,8 +54,8 @@ class MuridController {
 
         $updated = $this->muridModel->update(
             $data['id_biodata'],
-            $data['nama'],
-            $data['umur'],
+            $data['nama_murid'],
+            $data['umur_murid'],
             $data['jenis_kelamin'],
             $data['tempat_lahir'],
             $data['tanggal_lahir'],

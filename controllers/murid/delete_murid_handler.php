@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $_SESSION['message'] = $result['message'];
     if ($result['success']) {
-        header('Location: ./fetch_biodata_handler.php');
+        header('Location: ./fetch_murid_handler.php');
     } else {
         header('Location: ../../views/pengurus/sekretaris/data-murid.php');
     }

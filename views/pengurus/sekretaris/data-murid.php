@@ -60,25 +60,25 @@ if ($status !== 'sekretaris') {
                             <?php if (!empty($allMurid)) : ?>
                                 <?php foreach ($allMurid as $row): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($row['nama_murid']) ?></td>
-                                        <td><?= htmlspecialchars($row['umur_murid']) ?></td>
-                                        <td><?= htmlspecialchars($row['jenis_kelamin']) ?></td>
-                                        <td><?= htmlspecialchars($row['asal_tk']) ?></td>
+                                        <td><?= htmlspecialchars($row['nama_murid'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['umur_murid'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['jenis_kelamin'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['asal_tk'] ?? '-') ?></td>
                                         <td>
                                             <button class="btn btn-sm btn-info me-1 infoBtn" data-bs-toggle="modal" data-bs-target="#infoModal"
-                                            data-id="<?= htmlspecialchars($row['id_biodata'], ENT_QUOTES) ?>"
-                                            data-nama="<?= htmlspecialchars($row['nama_murid'], ENT_QUOTES) ?>"
-                                            data-umur="<?= htmlspecialchars($row['umur_murid'], ENT_QUOTES) ?>"
-                                            data-jk="<?= htmlspecialchars($row['jenis_kelamin'], ENT_QUOTES) ?>"
-                                            data-tempat="<?= htmlspecialchars($row['tempat_lahir'], ENT_QUOTES) ?>"
-                                            data-tanggal="<?= htmlspecialchars($row['tanggal_lahir'], ENT_QUOTES) ?>"
-                                            data-asal="<?= htmlspecialchars($row['asal_tk'], ENT_QUOTES) ?>"
-                                            data-alamat="<?= htmlspecialchars($row['alamat'], ENT_QUOTES) ?>"
-                                            data-nik="<?= htmlspecialchars($row['nik'], ENT_QUOTES) ?>"
-                                            data-nokk="<?= htmlspecialchars($row['no_kk'], ENT_QUOTES) ?>"
-                                            data-akta="<?= htmlspecialchars($row['file_akta'], ENT_QUOTES) ?>"
-                                            data-kk="<?= htmlspecialchars($row['file_kk'], ENT_QUOTES) ?>"
-                                            data-ijazah="<?= htmlspecialchars($row['file_ijazah'], ENT_QUOTES) ?>">
+                                            data-id="<?= htmlspecialchars($row['id_biodata'] ?? '', ENT_QUOTES) ?>"
+                                            data-nama="<?= htmlspecialchars($row['nama_murid'] ?? '', ENT_QUOTES) ?>"
+                                            data-umur="<?= htmlspecialchars($row['umur_murid'] ?? '', ENT_QUOTES) ?>"
+                                            data-jk="<?= htmlspecialchars($row['jenis_kelamin'] ?? '', ENT_QUOTES) ?>"
+                                            data-tempat="<?= htmlspecialchars($row['tempat_lahir'] ?? '', ENT_QUOTES) ?>"
+                                            data-tanggal="<?= htmlspecialchars($row['tanggal_lahir'] ?? '', ENT_QUOTES) ?>"
+                                            data-asal="<?= htmlspecialchars($row['asal_tk'] ?? '', ENT_QUOTES) ?>"
+                                            data-alamat="<?= htmlspecialchars($row['alamat'] ?? '', ENT_QUOTES) ?>"
+                                            data-nik="<?= htmlspecialchars($row['nik'] ?? '', ENT_QUOTES) ?>"
+                                            data-nokk="<?= htmlspecialchars($row['no_kk'] ?? '', ENT_QUOTES) ?>"
+                                            data-akta="<?= htmlspecialchars($row['file_akta'] ?? '', ENT_QUOTES) ?>"
+                                            data-kk="<?= htmlspecialchars($row['file_kk'] ?? '', ENT_QUOTES) ?>"
+                                            data-ijazah="<?= htmlspecialchars($row['file_ijazah'] ?? '', ENT_QUOTES) ?>">
                                                 <i class="bi bi-info-circle me-1"></i>Info
                                             </button>
                                         </td>
@@ -86,7 +86,7 @@ if ($status !== 'sekretaris') {
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7" class="text-center text-muted">Tidak ada data</td>
+                                    <td colspan="5" class="text-center text-muted">Tidak ada data</td>
                                 </tr>
                             <?php endif; ?>
                             <!-- Add more rows if needed -->

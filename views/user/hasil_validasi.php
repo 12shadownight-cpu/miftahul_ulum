@@ -60,14 +60,14 @@ if (!empty($getValidasi)) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($getValidasi)) : ?>
-                                <?php foreach ($getValidasi as $row) : ?>
+                            <?php if (!empty($validasiRows)) : ?>
+                                <?php foreach ($validasiRows as $row) : ?>
                                     <tr>
                                         <td><?= htmlspecialchars($row['hasil'] ?? '-') ?></td>
                                         <td><?= htmlspecialchars($row['keterangan'] ?? '-') ?></td>
                                         <?php if (isset($row['hasil']) && strtolower($row['hasil']) === "diterima") : ?>
                                             <td>
-                                                <a href="./bukti_pendaftaran.php" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary me-1">
+                                                <a href="../../controllers/validasi/print_validasi_handler.php?id=<?= htmlspecialchars($row['id_validasi']) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary me-1">
                                                     <i class="bi bi-printer me-1"></i>Cetak
                                                 </a>
                                             </td>
@@ -82,7 +82,7 @@ if (!empty($getValidasi)) {
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="7" class="text-center text-muted">Tidak ada data</td>
+                                    <td colspan="3" class="text-center text-muted">Tidak ada data</td>
                                 </tr>
                             <?php endif; ?>
                             <!-- Add more rows if needed -->

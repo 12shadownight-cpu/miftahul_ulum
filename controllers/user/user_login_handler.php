@@ -16,7 +16,7 @@ $controller = new UserController($db);
 
 //Prevent from hitting login form again
 if (isset($_SESSION['user_id'])) {
-    header('Location: ../../views/user/notice.php');
+    header('Location: ./user_notice_handler.php');
     exit;
 }
 
@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $controller->login($data);
 
     if ($result['success']) {
-        // Redirect to user notice page after login
-        header('Location: ../../views/user/notice.php');
+        // Redirect to user notice handler after login
+        header('Location: ./user_notice_handler.php');
         exit;
     } else {
         // Redirect back to login form with error message

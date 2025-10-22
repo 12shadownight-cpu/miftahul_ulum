@@ -46,13 +46,10 @@ if ($status !== 'sekretaris') {
           <div class="card">
             <div class="card-body">
               <form action="../../../controllers/validasi/add_validasi_handler.php" method="post">
-                <input type="hidden" name="id_biodata" id="inputBiodata">
-                <input type="hidden" name="id_user" id="inputUser">
-                <input type="hidden" name="id_orangtua" id="inputOrangtua">
                 <!-- Nama Siswa -->
                 <div class="mb-3">
                   <label class="form-label">Nama Murid</label>
-                  <select class="form-select" name="nama_murid" id="muridSelect" required>
+                  <select class="form-select" name="id_biodata" id="muridSelect" required>
                     <option value="">~ Pilih ~</option>
                     <?php if(!empty($allMurid)) : ?>
                       <?php foreach ($allMurid as $row): ?>
@@ -98,13 +95,16 @@ if ($status !== 'sekretaris') {
     <?php include '../../partials/footer/pengurus_footer.php'; ?>
 
     <script>
-      //Add value to hidden input
-      document.getElementById('muridSelect').addEventListener('change', function () {
-          const opt = this.selectedOptions[0];
-          document.getElementById('inputBiodata').value = opt.value || '';
-          document.getElementById('inputUser').value = opt.dataset.user || '';
-          document.getElementById('inputOrangtua').value = opt.dataset.orangtua || '';
-      });
+      const muridSelect = document.getElementById('muridSelect');
+      if (muridSelect) {
+        muridSelect.addEventListener('change', function () {
+          if (!this.value) {
+            this.setCustomValidity('Silakan pilih murid terlebih dahulu.');
+          } else {
+            this.setCustomValidity('');
+          }
+        });
+      }
     </script>
 </body>
 </html>

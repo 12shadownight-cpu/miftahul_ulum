@@ -37,7 +37,7 @@ if ($status !== 'sekretaris') {
         <!-- Main Content -->
         <div class="main-content container-fluid">
             <div class="px-3 py-2">
-                <h2 class="fw-bold mb-1">text-decoration-underline</h2>
+                <h2 class="fw-bold mb-1 text-decoration-underline">Halaman Tabel Validasi</h2>
                 <p class="text-muted">Halaman ini bertujuan untuk menampilkan tabel hasil verifikasi terhadap data siswa.</p>
             </div>
             <div class="card">
@@ -58,18 +58,18 @@ if ($status !== 'sekretaris') {
                             <?php if (!empty($allValidasi)) : ?>
                                 <?php foreach ($allValidasi as $row): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($row['nama_murid']) ?></td>
-                                        <td><?= htmlspecialchars($row['hasil']) ?></td>
-                                        <td><?= htmlspecialchars($row['keterangan']) ?></td>
+                                        <td><?= htmlspecialchars($row['nama_murid'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars(ucfirst($row['hasil'] ?? '-')) ?></td>
+                                        <td><?= htmlspecialchars($row['keterangan'] ?? '-') ?></td>
                                         <td>
                                             <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editModal"
-                                            data-id="<?= htmlspecialchars($row['id_validasi'], ENT_QUOTES) ?>"
-                                            data-nama="<?= htmlspecialchars($row['nama_murid'], ENT_QUOTES) ?>"
-                                            data-hasil="<?= htmlspecialchars($row['hasil'], ENT_QUOTES) ?>"
-                                            data-keterangan="<?= htmlspecialchars($row['keterangan'], ENT_QUOTES) ?>">
+                                            data-id="<?= htmlspecialchars($row['id_validasi'] ?? '', ENT_QUOTES) ?>"
+                                            data-nama="<?= htmlspecialchars($row['nama_murid'] ?? '', ENT_QUOTES) ?>"
+                                            data-hasil="<?= htmlspecialchars($row['hasil'] ?? '', ENT_QUOTES) ?>"
+                                            data-keterangan="<?= htmlspecialchars($row['keterangan'] ?? '', ENT_QUOTES) ?>">
                                                 <i class="bi bi-pencil-square me-1"></i>Ubah
                                             </button>
-                                            <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= $row['id_validasi'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                            <button class="btn btn-sm btn-danger deleteBtn" data-id="<?= htmlspecialchars($row['id_validasi'] ?? '') ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                                 <i class="bi bi-trash me-1"></i>Hapus
                                             </button>
                                         </td>
@@ -77,7 +77,7 @@ if ($status !== 'sekretaris') {
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7" class="text-center text-muted">No data available</td>
+                                    <td colspan="4" class="text-center text-muted">No data available</td>
                                 </tr>
                             <?php endif; ?>
                             <!-- Add more rows if needed -->
@@ -105,14 +105,7 @@ if ($status !== 'sekretaris') {
                             <!-- Nama Siswa -->
                             <div class="mb-3">
                                 <label class="form-label">Nama Siswa</label>
-                                <select class="form-select" name="nama_murid" id="editNama" required>
-                                    <option value="">~ Pilih ~</option>
-                                    <?php foreach ($allValidasi as $row): ?>
-                                        <option value="<?= htmlspecialchars($row['id_murid']) ?>">
-                                            <?= htmlspecialchars($row['nama_murid']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <input type="text" class="form-control" id="editNama" readonly>
                             </div>
                             <!-- Hasil Validasi -->
                             <div class="mb-3">

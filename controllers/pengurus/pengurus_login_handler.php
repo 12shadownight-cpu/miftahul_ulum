@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Redirect based on role
         if ($status === 'admin') {
-            header('Location: ../../views/pengurus/admin/dashboard.php');
+            header('Location: ./count_pengurus_handler.php');
         } elseif ($status === 'sekretaris') {
-            header('Location: ../../views/pengurus/sekretaris/dashboard.php');
+            header('Location: ../validasi/count_validasi_handler.php');
         } else {
             $_SESSION['message'] = 'Status pengurus tidak valid!';
             header('Location: ../../views/pengurus/login.php');

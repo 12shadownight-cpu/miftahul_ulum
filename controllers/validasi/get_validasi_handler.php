@@ -17,5 +17,4 @@ $getValidasi = $controller->getByIdWithRelations($id_user);
 
 // Tampilkan di view
 include __DIR__ . '/../../views/user/hasil_validasi.php';
-include __DIR__ . '/../../views/user/bukti_pendaftaran.php';
 ?>

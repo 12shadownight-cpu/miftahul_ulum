@@ -7,8 +7,19 @@ require_once __DIR__ . '/PengumumanController.php';
 $db = (new Database())->connect();
 $controller = new PengumumanController($db);
 
-// Ambil semua data pengumuman beserta info pengurus
-$getPengumuman = $controller->getAllWithPengurus();
+$pengurusStatus = $_SESSION['pengurus_status'] ?? null;
+$pengurusId = $_SESSION['pengurus_id'] ?? null;
+
+if($pengurusStatus !== 'admin') {
+    header('location: ../../views/pengurus/login.php');
+    exit;
+}
+
+// Ambil semua data pengumuman berdasarkan ID pengurus
+$getPengumuman = [];
+if($pengurusId !== null) {
+    $getPengumuman = $controller->getAllByPengurus((int) $pengurusId);
+}
 
 // Tampilkan di view
 include __DIR__ . '/../../views/pengurus/admin/input-pengumuman.php';

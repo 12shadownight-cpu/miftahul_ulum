@@ -10,7 +10,15 @@ $controller = new MuridController($db);
 // Ambil semua data murid
 $allMurid = $controller->getAll();
 
+// Tampilkan berdasarkan request
+$view = $_GET['view'] ?? 'murid';
+
 // Tamplikan pada view
-include __DIR__ . '/../../views/pengurus/sekretaris/data-murid.php';
-include __DIR__ . '/../../views/pengurus/sekretaris/validasi.php';
+if ($view === 'validasi') {
+    include __DIR__ . '/../../views/pengurus/sekretaris/validasi.php';
+} else {
+    include __DIR__ . '/../../views/pengurus/sekretaris/data-murid.php';
+}
+
+
 ?>

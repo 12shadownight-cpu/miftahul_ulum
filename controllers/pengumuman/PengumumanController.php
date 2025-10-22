@@ -180,6 +180,17 @@ class PengumumanController {
     }
 
     /**
+     * Get all announcements created by a specific pengurus.
+     *
+     * @param int  $id_pengurus
+     * @param bool $withPengurus
+     * @return array
+     */
+    public function getAllByPengurus($id_pengurus, $withPengurus = true) {
+        return $this->pengumumanModel->getAllByPengurus($id_pengurus, $withPengurus);
+    }
+
+    /**
      * Get one announcement by ID with pengurus data
      * @return array
      */

@@ -38,11 +38,11 @@ if ($status !== 'sekretaris') {
         <div class="main-content container-fluid">
             <div class="px-3 py-2">
                 <h2 class="fw-bold mb-1 text-decoration-underline">Halaman Biodata Orangtua</h2>
-                <p class="text-muted">Halaman ini bertujuan untuk menampilkan biodata orangtua yang telah tersimpan didalam database.</p>
+                <p class="text-muted">Halaman ini bertujuan untuk menampilkan biodata orangtua yang telah tersimpan di dalam database.</p>
             </div>
             <div class="card">
                 <div class="card-header bg-white" style="border-top: none; border-left: none; border-right: none;">
-                    <h5 class="mb-0">Data Table Example</h5>
+                    <h5 class="mb-0">Daftar Biodata Orangtua</h5>
                 </div>
                 <div class="card-body">
                     <table id="example" class="table table-striped" style="width:100%">
@@ -59,29 +59,29 @@ if ($status !== 'sekretaris') {
                             <?php if (!empty($allOrangtua)) : ?>
                                 <?php foreach ($allOrangtua as $row): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($row['nama_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['pekerjaan_ayah']) ?></td>
-                                        <td><?= htmlspecialchars($row['nama_ibu']) ?></td>
-                                        <td><?= htmlspecialchars($row['pekerjaan_ibu']) ?></td>
+                                        <td><?= htmlspecialchars($row['nama_ayah'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['pekerjaan_ayah'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['nama_ibu'] ?? '-') ?></td>
+                                        <td><?= htmlspecialchars($row['pekerjaan_ibu'] ?? '-') ?></td>
                                         <td>
                                             <button class="btn btn-sm btn-info me-1 infoBtn" data-bs-toggle="modal" data-bs-target="#infoModal"
-                                            data-id="<?= htmlspecialchars($row['id_orangtua'], ENT_QUOTES) ?>"
-                                            data-na="<?= htmlspecialchars($row['nama_ayah'], ENT_QUOTES) ?>"
-                                            data-ni="<?= htmlspecialchars($row['nama_ibu'], ENT_QUOTES) ?>"
-                                            data-tela="<?= htmlspecialchars($row['tempat_lahir_ayah'], ENT_QUOTES) ?>"
-                                            data-teli="<?= htmlspecialchars($row['tempat_lahir_ibu'], ENT_QUOTES) ?>"
-                                            data-tala="<?= htmlspecialchars($row['tanggal_lahir_ayah'], ENT_QUOTES) ?>"
-                                            data-tali="<?= htmlspecialchars($row['tanggal_lahir_ibu'], ENT_QUOTES) ?>"
-                                            data-pa="<?= htmlspecialchars($row['pekerjaan_ayah'], ENT_QUOTES) ?>"
-                                            data-pi="<?= htmlspecialchars($row['pekerjaan_ibu'], ENT_QUOTES) ?>"
-                                            data-ha="<?= htmlspecialchars($row['hp_ayah'], ENT_QUOTES) ?>"
-                                            data-hi="<?= htmlspecialchars($row['hp_ibu'], ENT_QUOTES) ?>"
-                                            data-nia="<?= htmlspecialchars($row['nik_ayah'], ENT_QUOTES) ?>"
-                                            data-nii="<?= htmlspecialchars($row['nik_ibu'], ENT_QUOTES) ?>"
-                                            data-ka="<?= htmlspecialchars($row['kk_ayah'], ENT_QUOTES) ?>"
-                                            data-ki="<?= htmlspecialchars($row['kk_ibu'], ENT_QUOTES) ?>"
-                                            data-kta="<?= htmlspecialchars($row['file_ktp_ayah'], ENT_QUOTES) ?>"
-                                            data-kti="<?= htmlspecialchars($row['file_ktp_ibu'], ENT_QUOTES) ?>">
+                                            data-id="<?= htmlspecialchars($row['id_orangtua'] ?? '', ENT_QUOTES) ?>"
+                                            data-na="<?= htmlspecialchars($row['nama_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-ni="<?= htmlspecialchars($row['nama_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-tela="<?= htmlspecialchars($row['tempat_lahir_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-teli="<?= htmlspecialchars($row['tempat_lahir_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-tala="<?= htmlspecialchars($row['tanggal_lahir_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-tali="<?= htmlspecialchars($row['tanggal_lahir_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-pa="<?= htmlspecialchars($row['pekerjaan_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-pi="<?= htmlspecialchars($row['pekerjaan_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-ha="<?= htmlspecialchars($row['hp_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-hi="<?= htmlspecialchars($row['hp_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-nia="<?= htmlspecialchars($row['nik_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-nii="<?= htmlspecialchars($row['nik_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-ka="<?= htmlspecialchars($row['kk_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-ki="<?= htmlspecialchars($row['kk_ibu'] ?? '', ENT_QUOTES) ?>"
+                                            data-kta="<?= htmlspecialchars($row['file_ktp_ayah'] ?? '', ENT_QUOTES) ?>"
+                                            data-kti="<?= htmlspecialchars($row['file_ktp_ibu'] ?? '', ENT_QUOTES) ?>">
                                                 <i class="bi bi-info-circle me-1"></i>Info
                                             </button>
                                         </td>
@@ -89,7 +89,7 @@ if ($status !== 'sekretaris') {
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7" class="text-center text-muted">Tidak ada data tersimpan</td>
+                                    <td colspan="5" class="text-center text-muted">Tidak ada data tersimpan</td>
                                 </tr>
                             <?php endif; ?>
                             <!-- Add more rows if needed -->
@@ -132,13 +132,13 @@ if ($status !== 'sekretaris') {
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ayah</label>
                                     <div class="input-group">
-                                    <input type="text" id="infoLahirAyah" name="tanggal_lahir_ayah" class="form-control dateInput" readonly>
+                                    <input type="text" id="infoTanggalAyah" name="tanggal_lahir_ayah" class="form-control dateInput" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Tanggal Lahir Ibu</label>
                                     <div class="input-group">
-                                    <input type="text" id="infoLahirIbu" name="tanggal_lahir_ibu" class="form-control dateInput" readonly>
+                                    <input type="text" id="infoTanggalIbu" name="tanggal_lahir_ibu" class="form-control dateInput" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

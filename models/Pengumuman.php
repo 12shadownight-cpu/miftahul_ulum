@@ -79,28 +79,31 @@ class Pengumuman {
     }
 
     /**
-     * Get announcement by ID
-     * @param int $id_pengurus - Staff ID
+     * Get announcement by its primary key
+     * @param int $id_pengumuman - Announcement ID
      * @param bool $withPengurus - Whether to join with pengurus table
+     * @param int $id_pengurus - Optional staff for ownership check
      * @return array|null - Announcement data or null if not found
      */
-    public function getById($id_pengurus, $withPengurus = false) {
+    public function getById($id_pengumuman, $withPengurus = false, $id_pengurus = null) {
         try {
             // Query based on whether join is needed
-            if ($withPengurus) {
-                $sql = "SELECT p.*, d.nama_pengurus
-                        FROM {$this->table} p
-                        JOIN data_pengurus d ON p.id_pengurus = d.id_pengurus
-                        WHERE p.id_pengurus = :id_pengurus
-                        LIMIT 1";
-            } else {
-                $sql = "SELECT * FROM {$this->table} 
-                        WHERE id_pengurus = :id_pengurus
-                        LIMIT 1";
+            $select = $withPengurus
+            ? "SELECT p.*, d.nama_pengurus
+                    FROM {$this->table} P
+                    JOIN data_pengurus d ON p.id_pengurus = d.id_pengurus"
+            : "SELECT p.* FROM {$this->table} P";
+
+            $sql = $select . " WHERE p.id_pengumuman = :id_pengumuman";
+            if($id_pengurus !== null) {
+                $sql .= " AND p.id_pengurus = :id_pengurus";
             }
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':id_pengumuman', $id_pengurus, PDO::PARAM_INT);
+            $stmt->bindValue(':id_pengumuman', $id_pengumuman, PDO::PARAM_INT);
+            if($id_pengurus !== null) {
+                $stmt->bindValue(':id_pengurus', $id_pengurus, PDO::PARAM_INT);
+            }
             $stmt->execute();
 
             // Return single row or null
@@ -108,6 +111,39 @@ class Pengumuman {
         } catch (PDOException $e) {
             error_log("Pengumuman getById error: " . $e->getMessage());
             return null;
+        }
+    }
+
+    /**
+     * Get all announcements created by a specific pengurus.
+     * @param int $id_pengurus - Staff ID
+     * @param bool $withPengurus - Whether to join with pengurus table
+     * @return array - List of announcements
+     */
+    public function getAllByPengurus($id_pengurus, $withPengurus = false) {
+        try {
+            // Query based on whether join is needed
+            if ($withPengurus) {
+                $sql = "SELECT p.*, d.nama_pengurus
+                        FROM {$this->table} p
+                        JOIN data_pengurus d ON p.id_pengurus = d.id_pengurus
+                        WHERE p.id_pengurus = :id_pengurus
+                        ORDER BY p.waktu_terbit DESC";
+            } else {
+                $sql = "SELECT * FROM {$this->table}
+                        WHERE id_pengurus = :id_pengurus
+                        ORDER BY waktu_terbit DESC";
+            }
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':id_pengurus', $id_pengurus, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Return rows or null
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Pengumuman getAllByPengurus error: " . $e->getMessage());
+            return [];
         }
     }
 

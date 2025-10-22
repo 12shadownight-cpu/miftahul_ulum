@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = [
         'id_biodata'     => $_POST['id_biodata'] ?? '',
-        'nama'           => $_POST['nama'] ?? '',
-        'umur'           => $_POST['umur'] ?? '',
+        'nama_murid'     => $_POST['nama_murid'] ?? '',
+        'umur_murid'     => $_POST['umur_murid'] ?? '',
         'jenis_kelamin'  => $_POST['jenis_kelamin'] ?? '',
         'tempat_lahir'   => $_POST['tempat_lahir'] ?? '',
         'tanggal_lahir'  => $_POST['tanggal_lahir'] ?? '',
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $_SESSION['message'] = $result['message'];
     if ($result['success']) {
-        header('Location: ./get_biodata_handler.php');
+        header('Location: ./get_murid_handler.php');
     } else {
         header('Location: ../../views/user/biodata_murid.php');
     }

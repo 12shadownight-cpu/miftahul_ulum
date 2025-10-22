@@ -25,7 +25,7 @@ class BiodataMurid {
      * @param string $file_ijazah
      * @return bool
      */
-    public function create($id_user, $nama, $umur, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $asal_tk, $alamat, $nik, $no_kk, $file_akta, $file_kk, $file_ijazah) {
+    public function create($id_user, $nama_murid, $umur_murid, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $asal_tk, $alamat, $nik, $no_kk, $file_akta, $file_kk, $file_ijazah) {
         try {
             // Validate files
             foreach (['file_akta' => $file_akta, 'file_kk' => $file_kk, 'file_ijazah' => $file_ijazah] as $name => $file) {
@@ -38,13 +38,13 @@ class BiodataMurid {
             $sql = "INSERT INTO {$this->table} 
                     (id_user, nama_murid, umur_murid, jenis_kelamin, tempat_lahir, tanggal_lahir, asal_tk, alamat, nik, no_kk, file_akta, file_kk, file_ijazah)
                     VALUES 
-                    (:id_user, :nama, :umur, :jk, :tempat_lahir, :tanggal_lahir, :asal_tk, :alamat, :nik, :no_kk, :file_akta, :file_kk, :file_ijazah)";
+                    (:id_user, :nama_murid, :umur_murid, :jk, :tempat_lahir, :tanggal_lahir, :asal_tk, :alamat, :nik, :no_kk, :file_akta, :file_kk, :file_ijazah)";
             
             $stmt = $this->conn->prepare($sql);
             
             $stmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-            $stmt->bindValue(':nama', $nama, PDO::PARAM_STR);
-            $stmt->bindValue(':umur', $umur, PDO::PARAM_INT);
+            $stmt->bindValue(':nama_murid', $nama_murid, PDO::PARAM_STR);
+            $stmt->bindValue(':umur_murid', $umur_murid, PDO::PARAM_INT);
             $stmt->bindValue(':jk', $jenis_kelamin, PDO::PARAM_STR);
             $stmt->bindValue(':tempat_lahir', $tempat_lahir, PDO::PARAM_STR);
             $stmt->bindValue(':tanggal_lahir', $tanggal_lahir, PDO::PARAM_STR);
@@ -69,11 +69,11 @@ class BiodataMurid {
     /**
      * Update student biodata
      */
-    public function update($id_biodata, $nama, $umur, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $asal_tk, $alamat, $nik, $no_kk, $file_akta = null, $file_kk = null, $file_ijazah = null) {
+    public function update($id_biodata, $nama_murid, $umur_murid, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $asal_tk, $alamat, $nik, $no_kk, $file_akta = null, $file_kk = null, $file_ijazah = null) {
         try {
             $sql = "UPDATE {$this->table} SET
-                    nama_murid = :nama,
-                    umur_murid = :umur,
+                    nama_murid = :nama_murid,
+                    umur_murid = :umur_murid,
                     jenis_kelamin = :jk,
                     tempat_lahir = :tempat_lahir,
                     tanggal_lahir = :tanggal_lahir,
@@ -98,8 +98,8 @@ class BiodataMurid {
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindValue(':id_biodata', $id_biodata, PDO::PARAM_INT);
-            $stmt->bindValue(':nama', $nama, PDO::PARAM_STR);
-            $stmt->bindValue(':umur', $umur, PDO::PARAM_INT);
+            $stmt->bindValue(':nama_murid', $nama_murid, PDO::PARAM_STR);
+            $stmt->bindValue(':umur_murid', $umur_murid, PDO::PARAM_INT);
             $stmt->bindValue(':jk', $jenis_kelamin, PDO::PARAM_STR);
             $stmt->bindValue(':tempat_lahir', $tempat_lahir, PDO::PARAM_STR);
             $stmt->bindValue(':tanggal_lahir', $tanggal_lahir, PDO::PARAM_STR);
