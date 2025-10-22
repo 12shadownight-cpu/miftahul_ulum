@@ -71,7 +71,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="../../assets/images/logo.svg" alt="Logo Madrasah" width="40" class="me-2">
+        <img src="../../assets/images/logo.png" alt="Logo Madrasah" width="40" class="me-2">
         MI Miftahul Ulum Batam
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -162,7 +162,7 @@ $terbitTanggal = $validasiData['waktu_terbit'] ?? date('Y-m-d');
 <body>
 
   <div class="page">
-    <img src="../../assets/images/logo.svg" alt="Logo" class="logo">
+    <img src="../../assets/images/logo.png" alt="Logo" class="logo">
 
     <div class="header">
       <div class="school-name">YAYASAN MIFTAHUL’ ULUM AL-MUNAWWAROH</div>
@@ -207,7 +207,7 @@ $terbitTanggal = $validasiData['waktu_terbit'] ?? date('Y-m-d');
 
     <div class="signature">
       <p>Batam, <?= htmlspecialchars(date('d F Y', strtotime($terbitTanggal))) ?><br>Ketua Panitia PPDB 2024</p>
-      <img src="../../assets/images/Pak Inten Signature.svg" alt="Tanda Tangan">
+      <img src="../../assets/images/Pak Inten Signature.png" alt="Tanda Tangan">
       <strong>Inten Hasannudin, S.Pd.I</strong>
     </div>
   </div>
