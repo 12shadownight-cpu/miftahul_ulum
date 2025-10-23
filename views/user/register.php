@@ -48,7 +48,7 @@ if (session_status() == PHP_SESSION_NONE) {
       background-color: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
       padding: 40px;
-      max-width: 420px;
+      max-width: 720px;
       width: 90%;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     }
@@ -70,6 +70,39 @@ if (session_status() == PHP_SESSION_NONE) {
       color: #333;
       display: block;
       margin-bottom: 6px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #000;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px 20px;          /* row gap, column gap */
+    }
+
+    .form-grid .form-group {
+        margin-bottom: 0;        /* the grid gap replaces the old spacing */
+    }
+
+    .form-grid .form-group:last-of-type {
+        grid-column: 1 / -1;    /* stretch across both columns */
+        justify-self: center;   /* center the block */
+        max-width: 360px;   /* optional cap if you want it a bit narrower */
+        width: 100%;             /* adjust as needed */
+    }
+
+    .form-grid .form-group:last-of-type input {
+        width: 100%;            /* keep the input filling that block */
     }
 
     .password-wrapper {
@@ -110,6 +143,10 @@ if (session_status() == PHP_SESSION_NONE) {
       border-radius: 8px;
       box-shadow: 2px 2px 0 #555;
       cursor: pointer;
+      grid-column: 1 / -1;   /* take both columns */
+      justify-self: center;  /* center the button in that space */
+      max-width: 360px;   /* optional cap if you want it a bit narrower */
+      width: 100%;            /* optional: shrink the width so centering is visible */
     }
 
     .login-btn:hover {
@@ -155,35 +192,37 @@ if (session_status() == PHP_SESSION_NONE) {
         <?php unset($_SESSION['register_message']); ?>
       <?php endif; ?>
     <form action="../../controllers/user/user_register_handler.php" method="POST">
-      <div class="form-group">
-        <label for="nama">Nama User</label>
-        <input type="text" name="nama_user" id="nama_user" placeholder="Masukkan Nama Lengkap" required />
-      </div>
-
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Masukkan username" required />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <div class="password-wrapper">
-          <input type="password" name="password" id="password" placeholder="Masukkan password" required />
-          <button type="button" class="toggle-password" aria-label="Tampilkan password" aria-pressed="false">Show</button>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nama">Nama User</label>
+          <input type="text" name="nama_user" id="nama_user" placeholder="Masukkan Nama Lengkap" required />
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" placeholder="Masukkan E-mail" required />
-      </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Masukkan username" required />
+        </div>
 
-      <div class="form-group">
-        <label for="no_hp">Nomor Handphone</label>
-        <input type="tel" name="no_hp" id="no_hp" placeholder="Masukkan Nomor Handphone" required />
-      </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" name="password" id="password" placeholder="Masukkan password" required />
+            <button type="button" class="toggle-password" aria-label="Tampilkan password" aria-pressed="false">Show</button>
+          </div>
+        </div>
 
-      <button type="submit" class="login-btn">Daftar</button>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" name="email" id="email" placeholder="Masukkan E-mail" required />
+        </div>
+
+        <div class="form-group">
+          <label for="no_hp">Nomor Handphone</label>
+          <input type="tel" name="no_hp" id="no_hp" placeholder="Masukkan Nomor Handphone" required />
+        </div>
+
+        <button type="submit" class="login-btn">Daftar</button>
+      </div>
     </form>
   </div>
 

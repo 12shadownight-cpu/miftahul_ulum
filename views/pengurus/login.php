@@ -72,6 +72,21 @@ if (session_status() == PHP_SESSION_NONE) {
       margin-bottom: 6px;
     }
 
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #000;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #1a30b3;
+      outline: none;
+    }
+
     .password-wrapper {
       position: relative;
     }

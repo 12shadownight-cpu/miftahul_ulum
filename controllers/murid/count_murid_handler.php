@@ -13,5 +13,10 @@ $validasiController = new ValidasiController($db);
 $totals = $muridController->getCounts();
 $counts = $validasiController->getCounts();
 
+$counts = array_merge($counts, [
+    'id_biodata' => ($totals['laki-laki'] ?? 0) + ($totals['perempuan'] ?? 0),
+    'hasil'    => ($counts['diterima'] ?? 0) + ($counts['ditolak'] ?? 0),
+]);
+
 // Now include the view 
 include __DIR__ . '/../../views/pengurus/sekretaris/dashboard.php';

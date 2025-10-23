@@ -20,14 +20,14 @@ class User {
         try {
             $sql = "INSERT INTO {$this->table}
                     (nama_user, username, password, email, no_hp)
-                    VALUES (:nama, :username, :password, :email, :no_hp)";
+                    VALUES (:nama_user, :username, :password, :email, :no_hp)";
             
             $stmt = $this->conn->prepare($sql);
 
             // Hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt->bindValue(':nama', $nama, PDO::PARAM_STR);
+            $stmt->bindValue(':nama_user', $nama, PDO::PARAM_STR);
             $stmt->bindValue(':username', $username, PDO::PARAM_STR);
             $stmt->bindValue(':password', $hashed_password, PDO::PARAM_STR);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);

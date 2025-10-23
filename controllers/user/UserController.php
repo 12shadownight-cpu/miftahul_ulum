@@ -15,7 +15,7 @@ class UserController {
 
         //Check empty data
         if (
-            empty($data['nama']) ||
+            empty($data['nama_user']) ||
             empty($data['username']) ||
             empty($data['password']) ||
             empty($data['email']) ||
@@ -59,7 +59,7 @@ class UserController {
 
         //Menambahkan user
         $created = $this->userModel->create(
-            $data['nama'],
+            $data['nama_user'],
             $data['username'],
             $data['password'],
             $data['email'],

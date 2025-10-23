@@ -15,6 +15,11 @@ if ($allPengurus === false || !is_array($allPengurus)) {
     $_SESSION['message'] = "No data found or failed to fetch pengurus data.";
 }
 
-// Tampilkan di view
-include __DIR__ . '/../../views/pengurus/admin/data-pengurus.php';
+$view = $_GET['view'] ?? 'data';
 
+// Tampilkan di view
+if($view === 'input') {
+    include __DIR__ . '/../../views/pengurus/admin/input-pengurus.php';
+} else {
+    include __DIR__ . '/../../views/pengurus/admin/data-pengurus.php';
+}

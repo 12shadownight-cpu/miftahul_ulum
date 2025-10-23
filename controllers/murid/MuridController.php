@@ -10,7 +10,7 @@ class MuridController {
     // Add new biodata
     public function create($data) {
         if (
-            empty($data['id_user']) || empty($data['nama']) || empty($data['umur']) ||
+            empty($data['id_user']) || empty($data['nama_murid']) || empty($data['umur_murid']) ||
             empty($data['jenis_kelamin']) || empty($data['tempat_lahir']) || empty($data['tanggal_lahir']) ||
             empty($data['asal_tk']) || empty($data['alamat']) || empty($data['nik']) ||
             empty($data['no_kk']) || empty($data['file_akta']) || empty($data['file_kk']) || empty($data['file_ijazah'])

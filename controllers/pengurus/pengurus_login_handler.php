@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($status === 'admin') {
             header('Location: ./count_pengurus_handler.php');
         } elseif ($status === 'sekretaris') {
-            header('Location: ../validasi/count_validasi_handler.php');
+            header('Location: ../murid/count_murid_handler.php');
         } else {
             $_SESSION['message'] = 'Status pengurus tidak valid!';
             header('Location: ../../views/pengurus/login.php');

@@ -16,11 +16,23 @@
       margin-right: 25px;
     }
 
+    .modal-header {
+      background-color: #b8b8f3;
+      position: relative;      /* anchor for absolute positioning */
+      display: flex;
+      justify-content: center; /* center title */
+    }
+
+    .modal-title {
+      text-align: center;
+      flex-grow: 1;
+    }
+
     .me-custom { margin-right: 40px; }
 
     /* Welcome Section */
     #welcome {
-      background: url('../../assets/images/school.jpg') no-repeat center center;
+      background: url('assets/images/school.jpg') no-repeat center center;
       background-size: cover;
       color: white;
       text-align: center;
@@ -71,7 +83,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="../../assets/images/logo.png" alt="Logo Madrasah" width="40" class="me-2">
+        <img src="assets/images/logo.png" alt="Logo Madrasah" width="40" class="me-2">
         MI Miftahul Ulum Batam
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -88,7 +100,7 @@
   </nav>
 
   <!-- Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -96,8 +108,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body text-center">
-          <a href="../user/login.php" class="btn btn-success mb-2 w-100">Login User</a>
-          <a href="../pengurus/login.php" class="btn btn-primary w-100">Login Pengurus</a>
+          <a href="views/user/login.php" class="btn btn-success mb-2 w-100">Login User</a>
+          <a href="views/pengurus/login.php" class="btn btn-primary w-100">Login Pengurus</a>
         </div>
       </div>
     </div>
@@ -143,43 +155,43 @@
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../../assets/images/kegiatan belajar.jpg" class="d-block w-100" alt="Kegiatan Sekolah">
+            <img src="assets/images/kegiatan belajar.jpg" class="d-block w-100" alt="Kegiatan Sekolah">
             <div class="carousel-caption">Kegiatan Belajar Mengajar</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/upacara bender.jpg" class="d-block w-100" alt="Upacara Bendera">
+            <img src="assets/images/upacara bender.jpg" class="d-block w-100" alt="Upacara Bendera">
             <div class="carousel-caption">Upacara Bendera</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/kegiatan pramuka.jpg" class="d-block w-100" alt="Kegiatan Pramuka">
+            <img src="assets/images/kegiatan pramuka.jpg" class="d-block w-100" alt="Kegiatan Pramuka">
             <div class="carousel-caption">Kegiatan Pramuka</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/lomba sains.jpg" class="d-block w-100" alt="Lomba Sains">
+            <img src="assets/images/lomba sains.jpg" class="d-block w-100" alt="Lomba Sains">
             <div class="carousel-caption">Lomba Sains Antar Sekolah</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/extrakurikuler seni.jpg" class="d-block w-100" alt="Ekstrakurikuler Seni">
+            <img src="assets/images/extrakurikuler seni.jpg" class="d-block w-100" alt="Ekstrakurikuler Seni">
             <div class="carousel-caption">Ekstrakurikuler Seni</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/kegiatan olahraga.jpg" class="d-block w-100" alt="Kegiatan Olahraga">
+            <img src="assets/images/kegiatan olahraga.jpg" class="d-block w-100" alt="Kegiatan Olahraga">
             <div class="carousel-caption">Kegiatan Olahraga</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/kegiatan sosial.jpg" class="d-block w-100" alt="Kegiatan Sosial">
+            <img src="assets/images/kegiatan sosial.jpg" class="d-block w-100" alt="Kegiatan Sosial">
             <div class="carousel-caption">Kegiatan Sosial</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/guru murid.jpg" class="d-block w-100" alt="Guru dan Murid">
+            <img src="assets/images/guru murid.jpg" class="d-block w-100" alt="Guru dan Murid">
             <div class="carousel-caption">Guru dan Murid Berprestasi</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/kegiatan bersama.jpg" class="d-block w-100" alt="Kegiatan Bersama">
+            <img src="assets/images/kegiatan bersama.jpg" class="d-block w-100" alt="Kegiatan Bersama">
             <div class="carousel-caption">Kegiatan Gotong Royong</div>
           </div>
           <div class="carousel-item">
-            <img src="../../assets/images/acara sekolah.jpg" class="d-block w-100" alt="Acara Sekolah">
+            <img src="assets/images/acara sekolah.jpg" class="d-block w-100" alt="Acara Sekolah">
             <div class="carousel-caption">Acara Akhir Tahun</div>
           </div>
         </div>

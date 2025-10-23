@@ -17,7 +17,7 @@ $controller = new UserController($db);
 // Check request method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
-        'nama'     => trim($_POST['nama'] ?? ''),
+        'nama_user'=> trim($_POST['nama_user'] ?? ''),
         'username' => trim($_POST['username'] ?? ''),
         'password' => trim($_POST['password'] ?? ''),
         'email'    => trim($_POST['email'] ?? ''),
